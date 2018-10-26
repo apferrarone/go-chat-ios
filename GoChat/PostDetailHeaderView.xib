@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PostDetailHeaderView" customModule="GoChat" customModuleProvider="target">
+            <connections>
+                <outlet property="contentContainerView" destination="9Vf-u9-dLP" id="RdK-Kb-uIS"/>
+                <outlet property="contentLabel" destination="hxk-MC-9LQ" id="sQi-PC-zU9"/>
+                <outlet property="repliesLabel" destination="79S-mP-Eak" id="iU1-fP-1QN"/>
+                <outlet property="spinner" destination="HbJ-Rl-3IQ" id="w0O-nI-hYN"/>
+                <outlet property="timestampLabel" destination="k2d-Vp-ihf" id="J5T-tz-2vD"/>
+                <outlet property="usernameLabel" destination="3nr-wJ-jEP" id="2B2-AA-ED9"/>
+                <outlet property="view" destination="iN0-l3-epB" id="w0Y-uJ-E4t"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="153"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Vf-u9-dLP" userLabel="header container">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="114"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nr-wJ-jEP" customClass="UsernameLabel" customModule="GoChat" customModuleProvider="target">
+                            <rect key="frame" x="8" y="8" width="73" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="22" id="P5b-hE-6Qv"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Content about PokemonGo and a bunch of other bullshit" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxk-MC-9LQ" customClass="ContentLabel" customModule="GoChat" customModuleProvider="target">
+                            <rect key="frame" x="8" y="33" width="359" height="41"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HXT-Os-GMl">
+                            <rect key="frame" x="327" y="89" width="40" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="9Nh-fv-WUh"/>
+                                <constraint firstAttribute="height" constant="25" id="zWc-pr-xGb"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <state key="normal" image="Ellipsis"/>
+                            <connections>
+                                <action selector="showPostOptions:" destination="-1" eventType="touchUpInside" id="QE5-mj-Dx5"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2d-Vp-ihf" customClass="TimestampLabel" customModule="GoChat" customModuleProvider="target">
+                            <rect key="frame" x="304" y="8" width="63" height="22"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="63" id="I8n-X9-4bP"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hxk-MC-9LQ" secondAttribute="bottom" constant="40" id="32c-l7-tV2"/>
+                        <constraint firstAttribute="trailing" secondItem="hxk-MC-9LQ" secondAttribute="trailing" constant="8" id="6z0-hx-mYY"/>
+                        <constraint firstItem="3nr-wJ-jEP" firstAttribute="top" secondItem="9Vf-u9-dLP" secondAttribute="top" constant="8" id="6za-hL-cQV"/>
+                        <constraint firstItem="3nr-wJ-jEP" firstAttribute="height" secondItem="k2d-Vp-ihf" secondAttribute="height" id="7Yf-XJ-4aj"/>
+                        <constraint firstItem="hxk-MC-9LQ" firstAttribute="leading" secondItem="9Vf-u9-dLP" secondAttribute="leading" constant="8" id="B7B-o8-1ZD"/>
+                        <constraint firstItem="3nr-wJ-jEP" firstAttribute="leading" secondItem="9Vf-u9-dLP" secondAttribute="leading" constant="8" id="Oqd-p5-a3f"/>
+                        <constraint firstAttribute="trailing" secondItem="HXT-Os-GMl" secondAttribute="trailing" constant="8" id="bu8-LJ-j26"/>
+                        <constraint firstItem="3nr-wJ-jEP" firstAttribute="centerY" secondItem="k2d-Vp-ihf" secondAttribute="centerY" id="cNE-ts-HUi"/>
+                        <constraint firstAttribute="bottom" secondItem="HXT-Os-GMl" secondAttribute="bottom" id="d3s-M9-pXE"/>
+                        <constraint firstItem="hxk-MC-9LQ" firstAttribute="trailing" secondItem="k2d-Vp-ihf" secondAttribute="trailing" id="fVW-VZ-qGm"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="99" id="mzO-hb-3s6"/>
+                        <constraint firstItem="hxk-MC-9LQ" firstAttribute="top" secondItem="3nr-wJ-jEP" secondAttribute="bottom" constant="3" id="wQz-VD-aFo"/>
+                    </constraints>
+                </view>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="HbJ-Rl-3IQ" userLabel="spinner">
+                    <rect key="frame" x="178" y="124.5" width="20" height="20"/>
+                    <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                </activityIndicatorView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 replies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79S-mP-Eak" userLabel="replies label">
+                    <rect key="frame" x="155.5" y="128" width="64.5" height="13"/>
+                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="79S-mP-Eak" firstAttribute="top" secondItem="9Vf-u9-dLP" secondAttribute="bottom" constant="14" id="777-7g-xEw"/>
+                <constraint firstItem="9Vf-u9-dLP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="MzH-wk-NKz"/>
+                <constraint firstItem="79S-mP-Eak" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Nuq-6U-K9n"/>
+                <constraint firstItem="9Vf-u9-dLP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="OHq-6l-fwI"/>
+                <constraint firstItem="79S-mP-Eak" firstAttribute="centerX" secondItem="HbJ-Rl-3IQ" secondAttribute="centerX" id="YPY-uW-wHN"/>
+                <constraint firstAttribute="bottom" secondItem="79S-mP-Eak" secondAttribute="bottom" constant="12" id="dLl-Gj-d4m"/>
+                <constraint firstAttribute="trailing" secondItem="9Vf-u9-dLP" secondAttribute="trailing" id="uMg-ke-7tj"/>
+                <constraint firstItem="79S-mP-Eak" firstAttribute="centerY" secondItem="HbJ-Rl-3IQ" secondAttribute="centerY" id="vwG-DA-VZK"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="33.5" y="-202.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Ellipsis" width="27" height="7"/>
+    </resources>
+</document>

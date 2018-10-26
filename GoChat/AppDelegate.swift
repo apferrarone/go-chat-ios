@@ -13,9 +13,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        self.window?.tintAdjustmentMode = .normal
+        
+        self.expectTearDownOnLogout()
+        
         return true
     }
 
@@ -40,7 +43,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    
+    // Utilities
+    
+    private func expectTearDownOnLogout()
+    {
+        NotificationCenter.default.addObserver(self, selector: #selector(resetWindow), name: Notification.Name(rawValue: Constants.Notifications.NOTIFICATION_LOGGED_OUT), object: nil)
+    }
+    
+    func resetWindow()
+    {
+        if let subviews = self.window?.subviews {
+            for view in subviews {
+                view.removeFromSuperview()
+            }
+        }
+        
+        let storyboard = UIStoryboard(name: Constants.Authentication.MAIN_STORYBOARD_ID, bundle: nil)
+        let initialController = storyboard.instantiateInitialViewController()
+        self.window?.rootViewController = initialController
+    }
 }
 
