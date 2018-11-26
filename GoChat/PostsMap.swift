@@ -20,7 +20,7 @@ import MapKit
 // try setting showsBuildings to true and showsUserLocation
 class PostsMap: MKMapView, MKMapViewDelegate
 {
-    //setter is private, getter is public :)
+    // setter is private, getter is public :)
     fileprivate(set) var posts = [Post]()
     
     weak var postDelegate: PostsMapDelegate? {
@@ -31,7 +31,7 @@ class PostsMap: MKMapView, MKMapViewDelegate
     
     var isDragging = false
     
-    // MARK: Public
+// MARK: - Public
     
     func setPins(forPosts posts: [Post])
     {
@@ -64,7 +64,7 @@ class PostsMap: MKMapView, MKMapViewDelegate
         self.setCenter(self.userLocation.coordinate, animated: true)
     }
     
-    // MARK: MKMapViewDelegate
+// MARK: - MKMapViewDelegate
     
     fileprivate struct MapConstants {
         static let MAP_VIEW_ID = "Pin"
@@ -82,11 +82,11 @@ class PostsMap: MKMapView, MKMapViewDelegate
                 view?.annotation = annotation
             }
             
-            //clear out previous accessory views since we reuse these views and reset them accordingly
-            //this is not really necessary here since they all will have this one right view
-            //but each view could have certain accessory views conditionally and this would be necessary
-            //view.rightCalloutAccessoryView = nil
-            //view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            // clear out previous accessory views since we reuse these views and reset them accordingly
+            // this is not really necessary here since they all will have this one right view
+            // but each view could have certain accessory views conditionally and this would be necessary
+            // view.rightCalloutAccessoryView = nil
+            // view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             
             if let post = annotation.post {
                 view?.post = post
@@ -109,13 +109,13 @@ class PostsMap: MKMapView, MKMapViewDelegate
     
     internal func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl)
     {
-        //asks delegate to show detail
+        // asks delegate to show detail
         if let annotationView = view as? PostAnnotationView, let post = annotationView.post {
             self.postDelegate?.postsMapView?(self, didSelectPost: post)
         }
     }
     
-    //inform delegate that the map is about to move
+    // inform delegate that the map is about to move
     internal func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool)
     {
         print("regionWillChange")
@@ -123,7 +123,7 @@ class PostsMap: MKMapView, MKMapViewDelegate
         self.postDelegate?.postsMap?(self, willMoveFromCenterCoordinate: self.centerCoordinate)
     }
     
-    //inform delegate that the map just moved
+    // inform delegate that the map just moved
     internal func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool)
     {
         print("regionDidChange")
@@ -150,27 +150,18 @@ class PostsMap: MKMapView, MKMapViewDelegate
         }
     }
     
-    // MARK: Utilities
+// MARK: - Utilities
     
     fileprivate func pinImage(forPost post: Post) -> UIImage!
     {
-        #if DEBUG
         let image = UIImage(named: Constants.ImageNames.PIN_BLUE)?.withRenderingMode(.alwaysTemplate)
         return image
-        #endif
-        
-        switch post.team {
-        case .some(Team.yellow): return UIImage(named: Constants.ImageNames.PIN_YELLOW)
-        case .some(Team.blue): return UIImage(named: Constants.ImageNames.PIN_BLUE)
-        case .some(Team.red): return UIImage(named: Constants.ImageNames.PIN_RED)
-        default: return UIImage(named: Constants.ImageNames.PIN_RED)
-        }
     }
     
 }
 
-//MKAnnotation can be anything so long as you can provide a coordinate and title
-//very easy to take any old object and extend it to conform to MKAnnotation
+// MKAnnotation can be anything so long as you can provide a coordinate and title
+// very easy to take any old object and extend it to conform to MKAnnotation
 class PostAnnotation: NSObject, MKAnnotation
 {
     var title: String?

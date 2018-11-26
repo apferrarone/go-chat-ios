@@ -14,7 +14,6 @@ class SelectTeamController: UIViewController
     @IBOutlet weak var teamLabel: UILabel!
     @IBOutlet var teamImageViews: [BouncingButton]!
     
-    var team: Team?
     var userIsNew = false
     var completionHandler: AuthenticationResultClosure?
     
@@ -32,16 +31,18 @@ class SelectTeamController: UIViewController
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        let color = self.team?.color ?? UIColor(hex: Constants.ColorHexValues.DARK_GRAY)
+        
+        let color = UIColor(hex: Constants.ColorHexValues.DARK_GRAY)
         self.navigationController?.navigationBar.barTintColor = color
         self.view.backgroundColor = color
-        self.teamLabel.text = self.team?.name ?? Constants.Authentication.CHOOSE_TEAM_MESSAGE
-        for view in self.teamImageViews {
-            view.alpha = 0.0
-        }
+        
+        self.teamLabel.text = Constants.Authentication.CHOOSE_TEAM_MESSAGE
+        self.teamImageViews.forEach { $0.alpha = 0.0 }
+
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool)
+    {
         super.viewDidAppear(animated)
         self.animateTeamImageViews()
     }
@@ -52,22 +53,11 @@ class SelectTeamController: UIViewController
         self.navigationController?.navigationBar.barTintColor = UIColor(hex: Constants.ColorHexValues.DARK_GRAY)
     }
     
-    // MARK: Actions:
+// MARK: - Actions:
     
-    @IBAction func yellowInstinctSelected(_ sender: UIButton)
-    {
-        self.select(team: .yellow)
-    }
-    
-    @IBAction func blueMysticSelected(_ sender: UIButton)
-    {
-        self.select(team: .blue)
-    }
-    
-    @IBAction func redValorSelected(_ sender: UIButton)
-    {
-        self.select(team: .red)
-    }
+    @IBAction func yellowInstinctSelected(_ sender: UIButton) {}
+    @IBAction func blueMysticSelected(_ sender: UIButton) {}
+    @IBAction func redValorSelected(_ sender: UIButton) {}
     
     @IBAction func handleCheckMarkTapped(_ sender: UIBarButtonItem)
     {
@@ -78,51 +68,33 @@ class SelectTeamController: UIViewController
     @IBAction func handleLoginTapped(_ sender: UIButton)
     {
         self.userIsNew = false
-        self.team = nil
         self.performSegue(withIdentifier: Segues.LOGIN, sender: self)
     }
     
-    // MARK: Navigation
+// MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.identifier == Segues.LOGIN {
             if let loginController = segue.destination.contentViewController as? LoginController {
-                loginController.team = self.team
                 loginController.userIsNew = self.userIsNew
                 loginController.completionHandler = self.completionHandler
             }
         }
     }
     
-    // MARK: Helpers
-    
-    fileprivate func select(team: Team)
-    {
-        self.checkButton.isEnabled = true
-        self.team = team
-        
-        UIView.animate(withDuration: 0.5, animations: {
-            self.teamLabel.text = team.name
-            self.view.backgroundColor = team.color
-            self.navigationController?.navigationBar.barTintColor = team.color
-        }, completion: nil)
-    }
+// MARK: - Helpers
     
     fileprivate func animateTeamImageViews()
     {
-        for view in self.teamImageViews {
-            view.alpha = 0.0
-        }
+        self.teamImageViews.forEach { $0.alpha = 0.0 }
         
         UIView.animate(withDuration: 1.0, delay: 0.5, options: .curveLinear, animations: {
-            for view in self.teamImageViews {
-                view.alpha = 1.0
-            }
+            self.teamImageViews.forEach { $0.alpha = 1.0 }
         }, completion: nil)
     }
     
-    // MARK: Status Bar Style
+// MARK: - Status Bar Style
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent

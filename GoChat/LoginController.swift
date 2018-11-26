@@ -30,17 +30,11 @@ class LoginController: UIViewController, UITextFieldDelegate, KeyboardMover
 
     var userIsNew = false
     
-    var team: Team? {
-        didSet {
-            self.updateUI()
-        }
-    }
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        self.checkButton.isEnabled = false //enabled w/ valid login
+        self.checkButton.isEnabled = false // enabled w/ valid login
         self.usernameField.delegate = self
         self.passwordTextField.delegate = self
     }
@@ -66,14 +60,14 @@ class LoginController: UIViewController, UITextFieldDelegate, KeyboardMover
         self.listenForKeyboardNotifications(shouldListen: false)
     }
     
-    // MARK: TextField
+// MARK: - TextField
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
         let currentText = textField.text as NSString?
         let newText = currentText?.replacingCharacters(in: range, with: string)
         
-        guard let count = newText?.characters.count else { return true }
+        guard let count = newText?.count else { return true }
         
         if textField == self.usernameField {
             return count <= Constants.Authentication.CHARACTERS_MAX_USERNAME
@@ -93,25 +87,27 @@ class LoginController: UIViewController, UITextFieldDelegate, KeyboardMover
     
     @objc fileprivate func toggleCheckButton()
     {
-        if let usernameCount = self.usernameField.text?.characters.count, let passwordCount = self.passwordTextField.text?.characters.count {
+        if let usernameCount = self.usernameField.text?.count, let passwordCount = self.passwordTextField.text?.count {
             self.checkButton.isEnabled = usernameCount >= 2 && passwordCount >= 2
         }
     }
     
-    // MARK: Actions
+// MARK: - Actions
     
     @IBAction func checkButtonTapped(_ sender: UIBarButtonItem)
     {
         self.spinner(shouldShow: true)
         
-        guard let username = self.usernameField.text?.trimmed(), let password = self.passwordTextField.text else { return }
+        guard let username = self.usernameField.text?.trimmed(),
+            let password = self.passwordTextField.text
+            else { return }
         
-        //sign up new user
+        // sign up new user
         if self.userIsNew {
             self.verifyAndSignup(withUsername: username, password: password)
         }
         
-        //login current user
+        // login current user
         else {
             self.login(withUsername: username, password: password)
         }
@@ -140,7 +136,6 @@ class LoginController: UIViewController, UITextFieldDelegate, KeyboardMover
         self.spinner(shouldShow: true)
         self.user.username = username
         self.user.password = password
-        self.user.team = self.team
         
         self.user.signUp() { user, error in
             
@@ -152,7 +147,7 @@ class LoginController: UIViewController, UITextFieldDelegate, KeyboardMover
                     return
                 }
                 
-                //Cheers! new user is signed up in the db so segue to next controller
+                // Cheers! new user is signed up in the db so segue to next controller
                 self.performSegue(withIdentifier: Segues.USER_LOCATION, sender: self)
             }
         }
@@ -175,13 +170,13 @@ class LoginController: UIViewController, UITextFieldDelegate, KeyboardMover
                     return
                 }
                 
-                //Cheers! user is logged in
+                // Cheers! user is logged in
                 self.completionHandler?(false)
             }
         }
     }
     
-    // MARK: Navigation
+// MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
@@ -193,7 +188,7 @@ class LoginController: UIViewController, UITextFieldDelegate, KeyboardMover
         }
     }
     
-    // MARK: Keyboard Mover
+// MARK: - Keyboard Mover
     
     func keyboardMoved(notification: Notification)
     {
@@ -204,24 +199,24 @@ class LoginController: UIViewController, UITextFieldDelegate, KeyboardMover
         }
     }
     
-    // MARK: Helpers
+// MARK: - Helpers
     
     func updateUI()
     {
-        self.navigationController?.navigationBar.barTintColor = self.team?.color ?? UIColor(hex: Constants.ColorHexValues.DARK_GRAY)
-        self.view?.backgroundColor = self.team?.color ?? UIColor(hex: Constants.ColorHexValues.DARK_GRAY)
-        self.containerView?.backgroundColor = self.team?.color ??  UIColor(hex: Constants.ColorHexValues.DARK_GRAY)
-        self.teamImageView?.image = self.team?.image ?? UIImage(named: Constants.ImageNames.POKEBALL_GRAY)
+        self.navigationController?.navigationBar.barTintColor = UIColor(hex: Constants.ColorHexValues.DARK_GRAY)
+        self.view?.backgroundColor = UIColor(hex: Constants.ColorHexValues.DARK_GRAY)
+        self.containerView?.backgroundColor = UIColor(hex: Constants.ColorHexValues.DARK_GRAY)
+        self.teamImageView?.image = UIImage(named: Constants.ImageNames.POKEBALL_GRAY)
     }
     
     func showCallout(withMessage message: String?)
     {
         self.calloutLabel.text = message
         
-        //move offscreen
+        // move offscreen
         self.calloutLabel.transform = CGAffineTransform(translationX: (UIApplication.shared.keyWindow?.frame.width)!, y: 0.0)
         
-        //animate back into position
+        // animate back into position
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
             self.calloutLabel.transform = .identity
         }, completion: nil)
@@ -237,7 +232,7 @@ class LoginController: UIViewController, UITextFieldDelegate, KeyboardMover
         }
     }
     
-    // MARK: Status Bar Style
+// MARK: - Status Bar Style
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent

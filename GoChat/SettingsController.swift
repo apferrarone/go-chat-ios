@@ -25,9 +25,7 @@ class SettingsController: UITableViewController, MFMailComposeViewControllerDele
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
         self.usernameLabel.text = User.currentUser()?.username
-        self.usernameLabel.textColor = User.currentUser()?.team?.color
     }
     
     // MARK: TableView

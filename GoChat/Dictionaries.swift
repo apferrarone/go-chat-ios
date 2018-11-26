@@ -31,8 +31,8 @@ extension Dictionary where Key : ExpressibleByStringLiteral, Value : OptionalTyp
         
         for (key, value) in self where key is String
         {
-            if let key = key as? String, let unwrappedValue = value.asOptional as? AnyObject
-            {
+            if let key = key as? String {
+                let unwrappedValue = value.asOptional as AnyObject
                 safe[key] = unwrappedValue
             }
         }

@@ -26,7 +26,7 @@ class MenuController: UIViewController, UINavigationControllerDelegate
     {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
-        self.shareButton.setTitleColor(User.currentUser()?.team?.color, for: .normal)
+        self.shareButton.setTitleColor(UIColor.white, for: .normal)
         self.setupParticles()
     }
     
@@ -59,7 +59,7 @@ class MenuController: UIViewController, UINavigationControllerDelegate
     
     @IBAction func handleSettings(_ sender: UIButton)
     {
-        //
+        print("Handle Settings")
     }
     
     @IBAction func menuTapped(_ sender: UIButton)
@@ -71,7 +71,7 @@ class MenuController: UIViewController, UINavigationControllerDelegate
     }
     
     
-    // MARK: Particle Emitter
+// MARK: - Particle Emitter
     
     private func setupParticles()
     {
@@ -83,16 +83,12 @@ class MenuController: UIViewController, UINavigationControllerDelegate
         particleEmitter.emitterSize = CGSize(width: 60.0, height: 30.0)
         particleEmitter.emitterMode = kCAEmitterLayerVolume
         particleEmitter.emitterShape = kCAEmitterLayerRectangle
+        particleEmitter.emitterCells = [self.emitterCell()]
         
-        let redCell = self.emitterCell(forTeam: .red)
-        let blueCell = self.emitterCell(forTeam: .blue)
-        let yellowCell = self.emitterCell(forTeam: .yellow)
-        
-        particleEmitter.emitterCells = [redCell, blueCell, yellowCell]
         self.shareContainer.layer.insertSublayer(particleEmitter, at: 0)
     }
     
-    private func emitterCell(forTeam team: Team) -> CAEmitterCell
+    private func emitterCell() -> CAEmitterCell
     {
         let cell = CAEmitterCell()
         cell.birthRate = 3.0
@@ -100,7 +96,7 @@ class MenuController: UIViewController, UINavigationControllerDelegate
         cell.lifetimeRange = 0.0
         cell.velocity = 250.0
         cell.velocityRange = 50.0
-        cell.emissionRange = CGFloat(M_PI) // half circle
+        cell.emissionRange = CGFloat.pi // half circle
         cell.spin = 2.0
         cell.spinRange = 3.0
         cell.scale = 0.5
@@ -108,15 +104,9 @@ class MenuController: UIViewController, UINavigationControllerDelegate
         cell.scaleSpeed = -0.05
         cell.yAcceleration = 200.0
         
-        var image = UIImage(named: "Star")
+        let image = UIImage(named: "Star")?.cgImage
+        cell.contents = image
         
-        switch team {
-        case .blue: image = UIImage(named: "Star-Blue")
-        case .red: image = UIImage(named: "Star-Red")
-        default: break
-        }
-        
-        cell.contents = image?.cgImage
         return cell
     }
     

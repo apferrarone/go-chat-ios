@@ -40,12 +40,8 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
     {
         super.viewDidLoad()
         
-        print("postID: \(self.post?._id), token: \(User.currentUserToken())")
-        
         self.setupTableView()
         self.textContainer.drawShadow(withOffset: -0.5)
-        self.growingTextView.tintColor = User.currentUser()?.team?.color
-        self.sendButton.tintColor = User.currentUser()?.currentColor()
         self.listenForKeyboardNotifications(shouldListen: true)
         self.headerView.delegate = self
         
@@ -85,18 +81,18 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
                 DispatchQueue.main.async {
                     guard error == nil else {
                         
-                        //keep input container enabled so user can send again:
+                        // keep input container enabled so user can send again:
                         self.sendButton.isEnabled = true
                         self.growingTextView.isUserInteractionEnabled = true
                         self.growingTextView.becomeFirstResponder()
                         return
                     }
                     
-                    //success
+                    // success
                     self.growingTextView.text = nil
                     
-                    //textViewDidChange only gets called when user changes something
-                    //not progamatic changes so we need to call it to update placeholder
+                    // textViewDidChange only gets called when user changes something
+                    // not progamatic changes so we need to call it to update placeholder
                     // call this on the delegate which is not us its the growingTextView
                     self.growingTextView.textViewDidChange(self.growingTextView)
                     
@@ -113,24 +109,21 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func showMap(_ sender: UIButton)
     {
         UIView.animate(withDuration: 0.25, animations: {
-            
             self.contentContainerView.alpha = self.contentIsVisible ? 1 : 0
-            
         }) { isComplete in
-            
             self.contentContainerView.isHidden = !self.contentContainerView.isHidden
             self.contentIsVisible = !self.contentIsVisible
         }
     }
     
-    // MARK: PostDetailHeaderDelegate Actions
+// MARK: - PostDetailHeaderDelegate Actions
     
     func showPostOptions()
     {
         self.showOptions(item: self.post)
     }
     
-    // MARK: TableView
+// MARK: - TableView
     
     private func setupTableView()
     {
@@ -159,7 +152,7 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         self.showOptions(item: self.comments[indexPath.row])
     }
     
-    // MARK: DZNEmptyDataSetSource
+// MARK: - DZNEmptyDataSetSource
     
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage!
     {
@@ -183,11 +176,12 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         return true
     }
     
-    // MARK: Keyboard Management
+// MARK: - Keyboard Management
+    
     func keyboardMoved(notification: Notification)
     {
-        //apple reccomends calling this before to address any pending layout changes
-        //always callt on the parent view to update all constraints
+        // apple reccomends calling this before to address any pending layout changes
+        // always callt on the parent view to update all constraints
         self.view.layoutIfNeeded()
         
         UIView.animateWithKeyboardNotification(notification: notification)
@@ -198,48 +192,48 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
             
             if keyboardHeight > 0 {
                 
-                //could also try to scroll the last cell to visible
-                //false keeps it less jerky since we are already inside of animation block
+                // could also try to scroll the last cell to visible
+                // false keeps it less jerky since we are already inside of animation block
                 self.tableView.scrollToBottom(animated: false)
                 
-                //get rid of replies label if snorlax is showing - he will cover it anyway
+                // get rid of replies label if snorlax is showing - he will cover it anyway
                 if self.comments.count == 0 {
                     self.headerView.repliesLabel.alpha = 0
                 }
                 
             } else {
                 
-                //bring back replies label
+                // bring back replies label
                 self.headerView.repliesLabel.alpha = 1
             }
         }
     }
     
-    // MARK: Utilities
+// MARK: - Utilities
     
     private func add(comment: Comment)
     {
         self.comments.append(comment)
         
-        //update comments tableView
+        // update comments tableView
         let indexPath = IndexPath(row: self.comments.count - 1, section: 0)
         self.tableView.beginUpdates()
         self.tableView.insertRows(at: [indexPath], with: .bottom)
         self.tableView.endUpdates()
         self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
         
-        //update header replies label
+        // update header replies label
         self.update(withNumberOfReplies: self.comments.count)
     }
     
-    //works for posts and comments only
+    // works for posts and comments only
     private func showOptions(item: AnyObject?)
     {
         let contentIsUsers: Bool
         let pronoun: String
         let isPost: Bool
         
-        //use whichever one is passed in
+        // use whichever one is passed in
         var selectedPost: Post! = nil
         var selectedComment: Comment! = nil
         
@@ -250,43 +244,41 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
             contentIsUsers = postItem.userID == User.currentUser()?._id
             let username = postItem.username != nil ? postItem.username! : "another person"
             pronoun = contentIsUsers ? "your post" : "\(username)'s post"
-            
-        } else if let commentItem = item as? Comment {
+        }
+        else if let commentItem = item as? Comment {
             
             selectedComment = commentItem
             isPost = false
             contentIsUsers = commentItem.userID == User.currentUser()?._id
             let username = commentItem.username != nil ? commentItem.username! : "another person"
             pronoun = contentIsUsers ? "your comment" : "\(username)'s comment"
-            
-        } else {
+        }
+        else {
             return
         }
         
-        //build alert action sheet style controller
+        // build alert action sheet style controller
         let controller = UIAlertController(title: pronoun, message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
         controller.addAction(cancelAction)
         
         if contentIsUsers {
             
-            //add delete action that is the only option the user will have for their own post or comment:
+            // add delete action that is the only option the user will have for their own post or comment:
             let deleteAction = UIAlertAction(title: "delete", style: .destructive) { action in
                 
                 UIAlertController.confirm(withPresenter: self, message: "Are you sure you want to delete this?") {
-                    
                     isPost ? self.delete(post: selectedPost) : self.delete(comment: selectedComment)
                 }
             }
             controller.addAction(deleteAction)
             
-        } else {
-            
-            //add report and block user action for another person's post or comment:
+        }
+        else {
+            // add report and block user action for another person's post or comment:
             let reportAction = UIAlertAction(title: "report", style: .destructive) { action in
                 
                 UIAlertController.confirm(withPresenter: self, message: "Are you sure you want to report this?") {
-                    
                     isPost ? self.report(post: selectedPost) : self.report(comment: selectedComment)
                 }
             }
@@ -295,14 +287,13 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
             let blockUserAction = UIAlertAction(title: "block user", style: .destructive) { action in
                 
                 UIAlertController.confirm(withPresenter: self, message: "Are you sure you want to block this user forever?") {
-                    
                     isPost ? self.blockUser(withUserID: selectedPost.userID) : self.blockUser(withUserID: selectedComment.userID)
                 }
             }
             controller.addAction(blockUserAction)
         }
         
-        //present alert Action sheet
+        // present alert Action sheet
         self.present(controller, animated: true, completion: nil)
     }
     
@@ -316,7 +307,7 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 if success && error == nil {
                     
-                    //broadcast that post was deleted so listeners can update data sources then return back to Posts
+                    // broadcast that post was deleted so listeners can update data sources then return back to Posts
                     NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.Notifications.NOTIFICATION_POST_DELETED), object: post)
                     _ = self.navigationController?.popViewController(animated: true)
                     
@@ -403,13 +394,13 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         if let commentIndex = self.comments.index(of: comment) {
             self.comments.remove(at: commentIndex)
            
-            //update comments table view
+            // update comments table view
             let indexPath = IndexPath(row: commentIndex, section: 0)
             self.tableView.beginUpdates()
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
             self.tableView.endUpdates()
             
-            //update replies label and post
+            // update replies label and post
             self.update(withNumberOfReplies: self.comments.count)
         }
     }
@@ -440,7 +431,7 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
     
     private func setupMap()
     {
-        //add pin for selected post and show it in the middle of the map
+        // add pin for selected post and show it in the middle of the map
         if let post = post {
             self.mapView.addPin(forPost: post, canShowCallout: false)
             self.mapView.centerCoordinate = CLLocationCoordinate2D(latitude: post.latitude, longitude: post.longitude)
@@ -461,7 +452,7 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
             DispatchQueue.main.async {
                 self.comments = newComments
                 
-                //update header replies label to be consistent to our dataSource
+                // update header replies label to be consistent to our dataSource
                 self.headerView.numReplies = self.comments.count
                 
                 // for no comments

@@ -52,7 +52,7 @@ enum UserRouter: Router
             return Constants.Paths.USERS + "/\(user._id!)" + Constants.Paths.POSTS
         case .postsCommentedOn(let user):
             return Constants.Paths.USERS + "/\(user._id!)" + Constants.Paths.POSTS_COMMENTED_ON
-        case .logout(let user):
+        case .logout:
             return Constants.Paths.LOGOUT_USER
         }
     }

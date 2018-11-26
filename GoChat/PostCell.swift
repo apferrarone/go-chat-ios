@@ -33,7 +33,6 @@ class PostCell: UITableViewCell
         didSet {
             self.contentLabel.text = post?.content
             self.usernameLabel.text = post?.username
-            self.usernameLabel.textColor = post?.team.color
             self.timestampLabel.setTimeAgo(date: post?.createdAt)
             
             #if DEBUG

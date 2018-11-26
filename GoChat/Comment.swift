@@ -14,7 +14,6 @@ class Comment: NSObject
     var postID: String?
     var userID: String?
     var username: String?
-    var user_team: Team?
     var content: String?
     var createdAt: NSDate?
     
@@ -55,9 +54,7 @@ class Comment: NSObject
             self.postID = comment.postID
             self.userID = comment.userID
             self.username = comment.username
-            self.user_team = comment.user_team
             self.content = comment.content
-            self.user_team = comment.user_team
             self.createdAt = comment.createdAt
         }
     }
@@ -65,7 +62,6 @@ class Comment: NSObject
     var isValid: Bool {
         let commentIsValid = self.postID != nil
             && self.userID != nil
-            && self.user_team != nil
             && self.username != nil
             && self.content != nil
         
@@ -84,10 +80,6 @@ extension Comment: CommentRouterCompliant
         comment.userID = parameters[Constants.JSONResponseKeys.USER_ID] as? String
         comment.username = parameters[Constants.JSONResponseKeys.USERNAME] as? String
         comment.postID = parameters[Constants.JSONResponseKeys.POST_ID] as? String
-
-        if let teamName = parameters[Constants.JSONResponseKeys.USER_TEAM] as? String {
-            comment.user_team = Team(rawValue: teamName)
-        }
         
         let createdISO = parameters[Constants.JSONResponseKeys.CREATED_AT] as? String
         

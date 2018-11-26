@@ -19,11 +19,7 @@ class LocationService: NSObject, CLLocationManagerDelegate
     
     // keep track of most recent location
     // useful when presenting a new vc w/ a map to use this location as default
-    static var lastLocation : CLLocationCoordinate2D? {
-        didSet {
-            print(lastLocation?.latitude, lastLocation?.longitude)
-        }
-    }
+    static var lastLocation : CLLocationCoordinate2D?
     
     fileprivate var locationCompletionHandler: ((CLLocationCoordinate2D?, Error?) -> Void)?
     
@@ -39,7 +35,7 @@ class LocationService: NSObject, CLLocationManagerDelegate
         self.locationManager.startUpdatingLocation()
     }
     
-    static func alertUserForFailedLocation(fromHostController hostController: UIViewController, completion: ((Void) -> Void)?)
+    static func alertUserForFailedLocation(fromHostController hostController: UIViewController, completion: (() -> Void)?)
     {
         let controller = UIAlertController(title: "Drat", message: "Can't find your location. Check Settings to make sure you've given us permission to use your location.", preferredStyle: .alert)
         

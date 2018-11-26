@@ -54,7 +54,6 @@ extension Post
                      commentCount: Int = 6,
                      lat: Double = 37.7749,
                      long: Double = -122.4194,
-                     team: Team = .yellow,
                      isPrivate: Bool = false,
                      createdAt: NSDate = NSDate())
     {
@@ -66,7 +65,6 @@ extension Post
         self.commentCount = commentCount
         self.latitude = lat
         self.longitude = long
-        self.team = team
         self.isPrivate = isPrivate
         self.createdAt = createdAt
     }
@@ -81,7 +79,6 @@ class Post: NSObject
     var commentCount: Int = 0
     var latitude : Double!
     var longitude : Double!
-    var team : Team!
     var isPrivate = false
     var createdAt : NSDate!
     
@@ -103,13 +100,15 @@ class Post: NSObject
     {
         if self._id != nil {
             
-            //we must have already saved 
-            let error = NSError(domain: "PostModel", code: 500, userInfo: [NSLocalizedDescriptionKey: "Trying to save an existing Post"])
-            completion(self, error)
+            // we must have already saved
+            let error = NSError(domain: "PostModel",
+                                code: 500,
+                                userInfo: [NSLocalizedDescriptionKey: "Trying to save an existing Post"])
             
-        } else {
+            completion(self, error)
+        }
+        else {
             APIService().create(post: self) { (newPost, error) in
-                
                 self.copy(post: newPost)
                 completion(self, error)
             }
@@ -122,7 +121,6 @@ class Post: NSObject
             && self.userID != nil
             && self.latitude != nil
             && self.longitude != nil
-            && self.team != nil
             && self.createdAt != nil)
         
         return valid
@@ -138,7 +136,6 @@ class Post: NSObject
             self.latitude = post.latitude
             self.longitude = post.longitude
             self.createdAt = post.createdAt
-            self.team = post.team
         }
     }
 }
@@ -156,22 +153,18 @@ extension Post: PostRouterCompliant
         post.longitude = parameters[Constants.JSONResponseKeys.LONGITUDE] as? Double
         
         let numComments = parameters[Constants.JSONResponseKeys.COMMENT_COUNT] as? Int
-        let teamName = parameters[Constants.JSONResponseKeys.TEAM_COLOR_NAME] as? String
         
         if let commentCount = numComments {
             post.commentCount = commentCount
         }
         
-        if let teamName = teamName {
-            post.team = Team(rawValue: teamName)
-        }
-        
-        let isPrivate = parameters[Constants.JSONResponseKeys.IS_PRIVATE] as? Bool
-        
         let createdISO = parameters[Constants.JSONResponseKeys.CREATED_AT] as? String
+        
         if let createdISO = createdISO {
             post.createdAt = NSDate(iso8601: createdISO)
         }
+        
+        let isPrivate = parameters[Constants.JSONResponseKeys.IS_PRIVATE] as? Bool
        
         if let isPrivate = isPrivate {
             post.isPrivate = isPrivate
@@ -192,7 +185,6 @@ extension Post: PostRouterCompliant
             Constants.ParameterKeys.CONTENT: self.content as AnyObject?,
             Constants.ParameterKeys.LATITUDE: self.latitude as AnyObject?,
             Constants.ParameterKeys.LONGITUDE: self.longitude as AnyObject?,
-            Constants.ParameterKeys.TEAM_COLOR_NAME: User.currentUser()?.team?.rawValue as AnyObject?,
             Constants.ParameterKeys.IS_PRIVATE: self.isPrivate as AnyObject?
         ]
         

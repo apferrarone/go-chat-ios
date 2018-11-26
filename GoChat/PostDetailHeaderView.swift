@@ -41,7 +41,6 @@ class PostDetailHeaderView: UIView
     
     var post: Post? {
         didSet {
-            self.usernameLabel.textColor = post?.team.color
             self.usernameLabel.text = self.post?.username
             self.contentLabel.text = self.post?.content
             self.timestampLabel.setTimeAgo(date: self.post?.createdAt)

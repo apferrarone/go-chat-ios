@@ -22,7 +22,7 @@ class UserLocationController: UIViewController
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        let color = self.user?.team?.color ?? UIColor(hex: Constants.ColorHexValues.DARK_GRAY)
+        let color = UIColor(hex: Constants.ColorHexValues.DARK_GRAY)
         self.navigationController?.navigationBar.barTintColor = color
         self.view.backgroundColor = color
     }

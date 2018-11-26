@@ -29,7 +29,6 @@ class User: NSObject
     
     var _id : String?
     var username: String?
-    var team : Team?
     var password : String?
     var teamMode = TeamMode.local
     
@@ -45,20 +44,6 @@ class User: NSObject
     {
         // for the current user session
         return keychain[KEYCHAIN_KEY_TOKEN]
-    }
-    
-    func currentColor() -> UIColor
-    {
-        switch self.teamMode {
-        case .local:
-            return UIColor(hex: Constants.ColorHexValues.DARK_GRAY)
-        case .team:
-            if let currentTeam = self.team {
-                return currentTeam.color
-            } else {
-                return UIColor(hex: Constants.ColorHexValues.DARK_GRAY)
-            }
-        }
     }
     
     func signUp(completion: ((User?, Error?) -> Void)?)
@@ -108,17 +93,17 @@ class User: NSObject
         }
     }
     
-    // MARK: Utilities
+// MARK: - Utilities
     
-    //remove local user
+    // remove local user
     func destroy(completion: BooleanResponseClosure)
     {
-        _currentUser = nil //destroy memory reference
-        User.userDefaults.removeSuite(named: USER_DEFAULT_SUITE) //destroy defaults
-        keychain[KEYCHAIN_KEY_TOKEN] = nil //destroy local token
-        completion(true, nil) //let caller do something first
+        _currentUser = nil // destroy memory reference
+        User.userDefaults.removeSuite(named: USER_DEFAULT_SUITE) // destroy defaults
+        keychain[KEYCHAIN_KEY_TOKEN] = nil // destroy local token
+        completion(true, nil) // let caller do something first
         
-        //notify anyone who is listening:
+        // notify anyone who is listening:
         NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.Notifications.NOTIFICATION_LOGGED_OUT), object: nil)
     }
     
@@ -126,10 +111,9 @@ class User: NSObject
     {
         self._id = user._id
         self.username = user.username
-        self.team = user.team
         self.save(authToken: token)
         self.persistUserData()
-        _currentUser = self //become active client
+        _currentUser = self // become active client
     }
     
     private func save(authToken token: String)
@@ -141,23 +125,20 @@ class User: NSObject
     {
         User.userDefaults.set(self._id, forKey: "_id")
         User.userDefaults.set(self.username, forKey: "username")
-        User.userDefaults.set(self.team?.rawValue, forKey: "team")
         User.userDefaults.synchronize()
     }
     
     private class func fromDefaults() -> User?
     {
-        if let id = User.userDefaults.string(forKey: "_id"),
-            let username = User.userDefaults.string(forKey: "username"),
-            let teamName = User.userDefaults.string(forKey: "team") {
-            let user = User()
-            user._id = id
-            user.username = username
-            user.team = Team(rawValue:teamName)
-            return user
-        } else {
-            return nil
-        }
+        guard let id = User.userDefaults.string(forKey: "_id"),
+            let username = User.userDefaults.string(forKey: "username")
+            else { return nil }
+        
+        let user = User()
+        user._id = id
+        user.username = username
+        
+        return user
     }
 }
 
@@ -169,15 +150,11 @@ extension User: UserRouterCompliant
         newUser._id = parameters[Constants.JSONResponseKeys.ID] as? String
         newUser.username = parameters[Constants.JSONResponseKeys.USERNAME] as? String
         
-        if let teamName = parameters[Constants.JSONResponseKeys.TEAM_COLOR_NAME] as? String {
-            newUser.team = Team(rawValue: teamName)
-        }
-        
-        if newUser.team != nil && newUser.username != nil {
-            return newUser
-        } else {
+        guard newUser.username != nil else {
             return nil
         }
+        
+        return newUser
     }
     
     func userParameters() -> [String : AnyObject]
@@ -185,8 +162,8 @@ extension User: UserRouterCompliant
         let params : [String: AnyObject?] = [
             Constants.ParameterKeys.USERNAME : self.username as AnyObject?,
             Constants.ParameterKeys.PASSWORD : self.password as AnyObject?,
-            Constants.ParameterKeys.TEAM_COLOR_NAME : self.team?.rawValue as AnyObject?
         ]
+        
         return params.safeFromNil()
     }
 }

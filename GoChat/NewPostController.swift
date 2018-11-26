@@ -53,7 +53,6 @@ class NewPostController: UIViewController, PostsMapDelegate, KeyboardMover, UITe
         self.title = self.navigationTitle
         self.setupMap()
         self.listenForKeyboardNotifications(shouldListen: true)
-        self.textView.tintColor = User.currentUser()?.team?.color
         self.textView.text = nil
         self.textView.contentInset.bottom = 8.0
         self.textView.becomeFirstResponder()
@@ -66,6 +65,7 @@ class NewPostController: UIViewController, PostsMapDelegate, KeyboardMover, UITe
         if let location = self.location {
             self.mapView.setCenter(location, animated: false)
         }
+        
         self.mapView.postDelegate = self
     }
     
@@ -74,30 +74,30 @@ class NewPostController: UIViewController, PostsMapDelegate, KeyboardMover, UITe
         self.listenForKeyboardNotifications(shouldListen: false)
     }
     
-    // MARK: UITextViewDelegate
+// MARK: - UITextViewDelegate
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
     {
-        return textView.text.characters.count + (text.characters.count - range.length) <= Constants.NewPost.CHARACTERS_MAX
+        return textView.text.count + (text.count - range.length) <= Constants.NewPost.CHARACTERS_MAX
     }
     
-    // MARK: PostsMapDelegate
+// MARK: - PostsMapDelegate
     
     func postsMapView(_ mapView: PostsMap, didMoveToCenterCoordinate centerCoordinate: CLLocationCoordinate2D)
     {
         self.location = centerCoordinate
     }
     
-    // MARK: Actions
+// MARK: - Actions
     
     @IBAction func handleCheckTapped(_ sender: UIButton)
     {
-        //if we are looking at the map toggle back since user selected location
+        // if we are looking at the map toggle back since user selected location
         if self.contentView.isHidden {
             self.toggleMap(self.mapButton)
         } else {
             
-            //we are ready to post user's new post:
+            // we are ready to post user's new post:
             if let text = self.textView.text, !text.isEmpty, let currentLocation = self.location {
                 sender.isEnabled = false
                 
@@ -107,7 +107,7 @@ class NewPostController: UIViewController, PostsMapDelegate, KeyboardMover, UITe
                 newPost.longitude = currentLocation.longitude
                 newPost.isPrivate = User.currentUser()?.teamMode == .team
                 
-                //save new post
+                // save new post
                 self.showSpinner(true)
                 
                 newPost.save { post, error in
@@ -117,9 +117,9 @@ class NewPostController: UIViewController, PostsMapDelegate, KeyboardMover, UITe
                         
                         if error != nil {
                             sender.isEnabled = true //enable send button (also should notify user)
-                        } else {
-                            
-                            //success
+                        }
+                        else {
+                            // success
                             self.view.endEditing(true)
                             self.delegate?.newPostControllerDidSubmit(controller: self, newPost: post, location: currentLocation)
                         }

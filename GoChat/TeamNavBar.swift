@@ -100,8 +100,8 @@ class TeamNavBar: UINavigationBar
         self.isOpaque = true
         
         if let user = User.currentUser() {
-            let color = user.currentColor()
-            let otherColor = color == DARK_GRAY ? user.team?.color : DARK_GRAY
+            let color = DARK_GRAY
+            let otherColor = DARK_GRAY
             
             self.barTintColor = color
             

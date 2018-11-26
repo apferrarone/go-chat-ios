@@ -13,11 +13,11 @@ import DZNEmptyDataSet
 
 class PostsController: UIViewController, UITableViewDataSource, UITableViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, PostsMapDelegate, UINavigationControllerDelegate, NewPostControllerDelegate
 {
-    //Foreground
+    // Foreground
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuButton: UIButton!
     
-    //Background
+    // Background
     @IBOutlet weak var backgroundContainer: UIView!
     
     @IBOutlet weak var mapView: PostsMap! {
@@ -29,7 +29,7 @@ class PostsController: UIViewController, UITableViewDataSource, UITableViewDeleg
     @IBOutlet weak var centerPoint: UIImageView!
     @IBOutlet weak var currentLocationButton: BouncingButton!
     @IBOutlet weak var blurView: UIVisualEffectView!
-    @IBOutlet weak var teamSwitch: UISwitch! //on for team posts, off for local posts
+    @IBOutlet weak var teamSwitch: UISwitch! // on for team posts, off for local posts
     
     fileprivate let refreshControl = UIRefreshControl()
     fileprivate let mapSpinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
@@ -57,7 +57,7 @@ class PostsController: UIViewController, UITableViewDataSource, UITableViewDeleg
         }
     }
     
-    //follow this all the way and make sure you understand its role:
+    // follow this all the way and make sure you understand its role:
     var radiusMiles: Double = Posts.RADIUS_DEFAULT_MILES
     
     let locationService = LocationService()
@@ -81,7 +81,6 @@ class PostsController: UIViewController, UITableViewDataSource, UITableViewDeleg
 //            self.mapView.postDelegate = self
 //        }
         
-        Team.notifyTeamChanged() //notify everyone who listens to update their team colors!
         self.fetchDefaultPosts() //will also center map to users current location
         self.mapView.zoomToHumanLevel()
         self.mapView.postDelegate = self
@@ -110,7 +109,7 @@ class PostsController: UIViewController, UITableViewDataSource, UITableViewDeleg
         self.listenForNotifications(false)
     }
     
-    // MARK: Navigation
+// MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
@@ -125,7 +124,8 @@ class PostsController: UIViewController, UITableViewDataSource, UITableViewDeleg
         }
     }
     
-    // MARK: UINavigationControllerDelegate
+// MARK: - UINavigationControllerDelegate
+    
     // implement this method for custom push/pop navigation controller vc transition
     // method receives both vcs involved in transition and we must return an animator object
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
@@ -139,12 +139,9 @@ class PostsController: UIViewController, UITableViewDataSource, UITableViewDeleg
         }
     }
     
-    // MARK: NewPostControllerDelegate
+// MARK: - NewPostControllerDelegate
     
-    func newPostControllerDidCancel(controller: NewPostController)
-    {
-        //
-    }
+    func newPostControllerDidCancel(controller: NewPostController) {}
     
     func newPostControllerLocationForPost(controller: NewPostController) -> CLLocationCoordinate2D?
     {
@@ -158,27 +155,23 @@ class PostsController: UIViewController, UITableViewDataSource, UITableViewDeleg
         
         controller.presentingViewController?.dismiss(animated: true) {
             
-            //update list/ map
+            // update list/ map
             self.fetchPosts(atLocation: location, withinMiles: nil, completion: nil)
             self.mapView.zoomToHumanLevel()
             self.radiusMiles = self.mapView.radiusInMiles()
         }
     }
     
-    // MARK: Actions
+// MARK: - Actions
     
     @IBAction func handleTeamChange(_ sender: UISwitch)
     {
         User.currentUser()?.teamMode = sender.isOn ? .team : .local
         self.updateTitle()
-        Team.notifyTeamChanged()
         
         UIView.animate(withDuration: 0.22, animations: {
-            
             self.tableView.alpha = 0
-            
         }) { isFinished in
-            
             self.updateMapPins()
             self.tableView.reloadData()
             self.tableView.layoutIfNeeded()
@@ -438,7 +431,6 @@ class PostsController: UIViewController, UITableViewDataSource, UITableViewDeleg
     fileprivate func showMapLoading(_ shouldShow: Bool)
     {
         if shouldShow {
-            self.mapSpinner.color = User.currentUser()?.currentColor()
             self.backgroundContainer.addSubview(self.mapSpinner)
             self.mapSpinner.translatesAutoresizingMaskIntoConstraints = false
             self.mapSpinner.topAnchor.constraint(equalTo: self.backgroundContainer.topAnchor, constant: 20.0).isActive = true

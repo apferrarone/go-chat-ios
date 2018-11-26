@@ -18,7 +18,6 @@ class CommentCell: UITableViewCell
     var comment: Comment? {
         didSet {
             self.usernameLabel.text = comment?.username
-            self.usernameLabel.textColor = comment?.user_team?.color
             self.contentLabel.text = comment?.content
             self.timestampLabel.setTimeAgo(date: comment?.createdAt)
         }

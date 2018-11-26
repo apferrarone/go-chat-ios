@@ -8,7 +8,7 @@ target 'GoChat' do
 
   # Pods for GoChat
 
-pod 'Alamofire', '~> 4.0'
+pod 'Alamofire'
 pod 'DZNEmptyDataSet'
 pod 'KeychainAccess'
 

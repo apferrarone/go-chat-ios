@@ -8,17 +8,23 @@
 
 import UIKit
 
-class PokeballButton: TeamColorButton
+class PokeballButton: UIButton
 {
-    override func image(forTeam team: Team?) -> UIImage? {
-        #if DEBUG
-            return UIImage(named: "CreateIconWhite")
-        #endif
-        switch team {
-            case .some(.yellow): return UIImage(named: Constants.ImageNames.POKEBALL_YELLOW)
-            case .some(.red): return UIImage(named: Constants.ImageNames.POKEBALL_RED)
-            case .some(.blue): return UIImage(named: Constants.ImageNames.POKEBALL_BLUE)
-            default: return UIImage(named: Constants.ImageNames.POKEBALL_GRAY)
-        }
+    override init(frame: CGRect)
+    {
+        super.init(frame: frame)
+        self.setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
+        self.setup()
+    }
+    
+    func setup()
+    {
+        let createImage = UIImage(named: "CreateIconWhite")
+        self.setImage(createImage, for: .normal)
     }
 }

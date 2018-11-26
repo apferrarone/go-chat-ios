@@ -60,12 +60,6 @@ class MyPostsController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         self.tableView.deselect()
         self.tableView.reloadData()
-        
-        //stupid hack, for some reason notifying team change only works in didAppear
-        //and its only for this vc?
-        wait(seconds: 0.0) {
-            Team.notifyTeamChanged() //make sure bar colors match
-        }
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -80,9 +74,7 @@ class MyPostsController: UIViewController, UITableViewDelegate, UITableViewDataS
     {
         User.currentUser()?.teamMode = sender.isOn ? .team : .local
         self.setTitle()
-        
-        Team.notifyTeamChanged()
-        
+                
         UIView.animate(withDuration: 0.3, animations: { 
             
             self.tableView.alpha = 0.0
