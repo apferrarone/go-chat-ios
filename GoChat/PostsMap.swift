@@ -91,11 +91,8 @@ class PostsMap: MKMapView, MKMapViewDelegate
             if let post = annotation.post {
                 view?.post = post
                 let pinImage: UIImage! = self.pinImage(forPost: post)
-                view?.image = pinImage
-                
-                #if DEBUG
-                view?.tintColor = UIColor(hex: Constants.ColorHexValues.CRYPTO_PINK)
-                #endif
+//                view?.image = pinImage
+                view?.pinTintColor = UIColor(hex: Constants.ColorHexValues.CRYPTO_PINK)
                 
                 //default means pin center is on coordinate, but we want the bottom of the pin there
                 view?.centerOffset = CGPoint(x: 0, y: -(pinImage.size.height / 2))
@@ -192,7 +189,7 @@ class PostAnnotation: NSObject, MKAnnotation
     }
 }
 
-class PostAnnotationView: MKAnnotationView
+class PostAnnotationView: MKPinAnnotationView
 {
     var post: Post?
 }
