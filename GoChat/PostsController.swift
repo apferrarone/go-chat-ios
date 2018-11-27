@@ -73,15 +73,14 @@ class PostsController: UIViewController, UITableViewDataSource, UITableViewDeleg
         self.refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         self.tableView.addSubview(self.refreshControl)
         
-        //check for a logged in user, if not begin auth flow
+        // check for a logged in user, if not begin auth flow
 //        self.checkForUser { newUser in
-//            Team.notifyTeamChanged() //notify everyone who listens to update their team colors!
 //            self.fetchDefaultPosts() //will also center map to users current location
 //            self.mapView.zoomToHumanLevel()
 //            self.mapView.postDelegate = self
 //        }
         
-        self.fetchDefaultPosts() //will also center map to users current location
+        self.fetchDefaultPosts() // will also center map to users current location
         self.mapView.zoomToHumanLevel()
         self.mapView.postDelegate = self
     }

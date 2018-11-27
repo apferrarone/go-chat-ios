@@ -18,6 +18,5 @@ class UsernameLabel: UILabel
     func setup()
     {
         self.font = UIFont(name: "Avenir-Heavy", size: 14)
-        self.textColor = .black
     }
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,84 +25,98 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="153"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Vf-u9-dLP" userLabel="header container">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="114"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jZR-NB-vfb" userLabel="outer header container">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="127"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nr-wJ-jEP" customClass="UsernameLabel" customModule="GoChat" customModuleProvider="target">
-                            <rect key="frame" x="8" y="8" width="73" height="22"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Vf-u9-dLP" userLabel="header container">
+                            <rect key="frame" x="12" y="12" width="351" height="109"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nr-wJ-jEP" customClass="UsernameLabel" customModule="GoChat" customModuleProvider="target">
+                                    <rect key="frame" x="12" y="8" width="73" height="22"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="22" id="P5b-hE-6Qv"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Content about PokemonGo and a bunch of other bullshit" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxk-MC-9LQ" customClass="ContentLabel" customModule="GoChat" customModuleProvider="target">
+                                    <rect key="frame" x="12" y="33" width="327" height="36"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HXT-Os-GMl">
+                                    <rect key="frame" x="303" y="80" width="40" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="9Nh-fv-WUh"/>
+                                        <constraint firstAttribute="height" constant="25" id="zWc-pr-xGb"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <state key="normal" image="Ellipsis"/>
+                                    <connections>
+                                        <action selector="showPostOptions:" destination="-1" eventType="touchUpInside" id="QE5-mj-Dx5"/>
+                                    </connections>
+                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2d-Vp-ihf" customClass="TimestampLabel" customModule="GoChat" customModuleProvider="target">
+                                    <rect key="frame" x="276" y="8" width="63" height="22"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="63" id="I8n-X9-4bP"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="0.099716395547945202" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="22" id="P5b-hE-6Qv"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Content about PokemonGo and a bunch of other bullshit" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxk-MC-9LQ" customClass="ContentLabel" customModule="GoChat" customModuleProvider="target">
-                            <rect key="frame" x="8" y="33" width="359" height="41"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HXT-Os-GMl">
-                            <rect key="frame" x="327" y="89" width="40" height="25"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="40" id="9Nh-fv-WUh"/>
-                                <constraint firstAttribute="height" constant="25" id="zWc-pr-xGb"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <state key="normal" image="Ellipsis"/>
-                            <connections>
-                                <action selector="showPostOptions:" destination="-1" eventType="touchUpInside" id="QE5-mj-Dx5"/>
-                            </connections>
-                        </button>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2d-Vp-ihf" customClass="TimestampLabel" customModule="GoChat" customModuleProvider="target">
-                            <rect key="frame" x="304" y="8" width="63" height="22"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="63" id="I8n-X9-4bP"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hxk-MC-9LQ" secondAttribute="bottom" constant="40" id="32c-l7-tV2"/>
+                                <constraint firstAttribute="trailing" secondItem="hxk-MC-9LQ" secondAttribute="trailing" constant="12" id="6z0-hx-mYY"/>
+                                <constraint firstItem="3nr-wJ-jEP" firstAttribute="top" secondItem="9Vf-u9-dLP" secondAttribute="top" constant="8" id="6za-hL-cQV"/>
+                                <constraint firstItem="3nr-wJ-jEP" firstAttribute="height" secondItem="k2d-Vp-ihf" secondAttribute="height" id="7Yf-XJ-4aj"/>
+                                <constraint firstItem="hxk-MC-9LQ" firstAttribute="leading" secondItem="9Vf-u9-dLP" secondAttribute="leading" constant="12" id="B7B-o8-1ZD"/>
+                                <constraint firstItem="3nr-wJ-jEP" firstAttribute="leading" secondItem="9Vf-u9-dLP" secondAttribute="leading" constant="12" id="Oqd-p5-a3f"/>
+                                <constraint firstItem="k2d-Vp-ihf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3nr-wJ-jEP" secondAttribute="trailing" constant="16" id="S8L-VS-c7J"/>
+                                <constraint firstAttribute="trailing" secondItem="HXT-Os-GMl" secondAttribute="trailing" constant="8" id="bu8-LJ-j26"/>
+                                <constraint firstItem="3nr-wJ-jEP" firstAttribute="centerY" secondItem="k2d-Vp-ihf" secondAttribute="centerY" id="cNE-ts-HUi"/>
+                                <constraint firstAttribute="bottom" secondItem="HXT-Os-GMl" secondAttribute="bottom" constant="4" id="d3s-M9-pXE"/>
+                                <constraint firstItem="hxk-MC-9LQ" firstAttribute="trailing" secondItem="k2d-Vp-ihf" secondAttribute="trailing" id="fVW-VZ-qGm"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="99" id="mzO-hb-3s6"/>
+                                <constraint firstItem="hxk-MC-9LQ" firstAttribute="top" secondItem="3nr-wJ-jEP" secondAttribute="bottom" constant="3" id="wQz-VD-aFo"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hxk-MC-9LQ" secondAttribute="bottom" constant="40" id="32c-l7-tV2"/>
-                        <constraint firstAttribute="trailing" secondItem="hxk-MC-9LQ" secondAttribute="trailing" constant="8" id="6z0-hx-mYY"/>
-                        <constraint firstItem="3nr-wJ-jEP" firstAttribute="top" secondItem="9Vf-u9-dLP" secondAttribute="top" constant="8" id="6za-hL-cQV"/>
-                        <constraint firstItem="3nr-wJ-jEP" firstAttribute="height" secondItem="k2d-Vp-ihf" secondAttribute="height" id="7Yf-XJ-4aj"/>
-                        <constraint firstItem="hxk-MC-9LQ" firstAttribute="leading" secondItem="9Vf-u9-dLP" secondAttribute="leading" constant="8" id="B7B-o8-1ZD"/>
-                        <constraint firstItem="3nr-wJ-jEP" firstAttribute="leading" secondItem="9Vf-u9-dLP" secondAttribute="leading" constant="8" id="Oqd-p5-a3f"/>
-                        <constraint firstAttribute="trailing" secondItem="HXT-Os-GMl" secondAttribute="trailing" constant="8" id="bu8-LJ-j26"/>
-                        <constraint firstItem="3nr-wJ-jEP" firstAttribute="centerY" secondItem="k2d-Vp-ihf" secondAttribute="centerY" id="cNE-ts-HUi"/>
-                        <constraint firstAttribute="bottom" secondItem="HXT-Os-GMl" secondAttribute="bottom" id="d3s-M9-pXE"/>
-                        <constraint firstItem="hxk-MC-9LQ" firstAttribute="trailing" secondItem="k2d-Vp-ihf" secondAttribute="trailing" id="fVW-VZ-qGm"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="99" id="mzO-hb-3s6"/>
-                        <constraint firstItem="hxk-MC-9LQ" firstAttribute="top" secondItem="3nr-wJ-jEP" secondAttribute="bottom" constant="3" id="wQz-VD-aFo"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="99" id="1Lj-qq-Utq"/>
+                        <constraint firstAttribute="trailing" secondItem="9Vf-u9-dLP" secondAttribute="trailing" constant="12" id="59Z-Zf-QTH"/>
+                        <constraint firstItem="9Vf-u9-dLP" firstAttribute="top" secondItem="jZR-NB-vfb" secondAttribute="top" constant="12" id="ffh-RD-pUJ"/>
+                        <constraint firstItem="9Vf-u9-dLP" firstAttribute="leading" secondItem="jZR-NB-vfb" secondAttribute="leading" constant="12" id="kkq-g2-TIe"/>
+                        <constraint firstAttribute="bottom" secondItem="9Vf-u9-dLP" secondAttribute="bottom" constant="6" id="oq0-Ji-YIE"/>
                     </constraints>
                 </view>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="HbJ-Rl-3IQ" userLabel="spinner">
-                    <rect key="frame" x="178" y="124.5" width="20" height="20"/>
+                    <rect key="frame" x="177.5" y="131" width="20" height="20"/>
                     <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                 </activityIndicatorView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 replies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79S-mP-Eak" userLabel="replies label">
-                    <rect key="frame" x="155.5" y="128" width="64.5" height="13"/>
+                    <rect key="frame" x="155.5" y="141" width="64.5" height="0.0"/>
                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
-                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="0.2519263698630137" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="79S-mP-Eak" firstAttribute="top" secondItem="9Vf-u9-dLP" secondAttribute="bottom" constant="14" id="777-7g-xEw"/>
-                <constraint firstItem="9Vf-u9-dLP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="MzH-wk-NKz"/>
                 <constraint firstItem="79S-mP-Eak" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Nuq-6U-K9n"/>
-                <constraint firstItem="9Vf-u9-dLP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="OHq-6l-fwI"/>
+                <constraint firstItem="jZR-NB-vfb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Sue-GW-Ger"/>
                 <constraint firstItem="79S-mP-Eak" firstAttribute="centerX" secondItem="HbJ-Rl-3IQ" secondAttribute="centerX" id="YPY-uW-wHN"/>
+                <constraint firstAttribute="trailing" secondItem="jZR-NB-vfb" secondAttribute="trailing" id="bS8-yy-wwn"/>
                 <constraint firstAttribute="bottom" secondItem="79S-mP-Eak" secondAttribute="bottom" constant="12" id="dLl-Gj-d4m"/>
-                <constraint firstAttribute="trailing" secondItem="9Vf-u9-dLP" secondAttribute="trailing" id="uMg-ke-7tj"/>
+                <constraint firstItem="jZR-NB-vfb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="hno-80-P19"/>
+                <constraint firstItem="79S-mP-Eak" firstAttribute="top" secondItem="jZR-NB-vfb" secondAttribute="bottom" constant="14" id="n2A-Vt-GiH"/>
                 <constraint firstItem="79S-mP-Eak" firstAttribute="centerY" secondItem="HbJ-Rl-3IQ" secondAttribute="centerY" id="vwG-DA-VZK"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="33.5" y="-202.5"/>
+            <point key="canvasLocation" x="-86" y="-282"/>
         </view>
     </objects>
     <resources>

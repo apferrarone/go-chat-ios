@@ -131,8 +131,6 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.clipsToBounds = false
         self.tableView.contentInset.bottom = 20
-        self.headerView.contentContainerView.drawShadow()
-        self.headerView.contentContainerView.rasterizeShadow()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -266,30 +264,30 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
             
             // add delete action that is the only option the user will have for their own post or comment:
             let deleteAction = UIAlertAction(title: "delete", style: .destructive) { action in
-                
                 UIAlertController.confirm(withPresenter: self, message: "Are you sure you want to delete this?") {
                     isPost ? self.delete(post: selectedPost) : self.delete(comment: selectedComment)
                 }
             }
+            
             controller.addAction(deleteAction)
             
         }
         else {
             // add report and block user action for another person's post or comment:
             let reportAction = UIAlertAction(title: "report", style: .destructive) { action in
-                
                 UIAlertController.confirm(withPresenter: self, message: "Are you sure you want to report this?") {
                     isPost ? self.report(post: selectedPost) : self.report(comment: selectedComment)
                 }
             }
+            
             controller.addAction(reportAction)
             
             let blockUserAction = UIAlertAction(title: "block user", style: .destructive) { action in
-                
-                UIAlertController.confirm(withPresenter: self, message: "Are you sure you want to block this user forever?") {
+                                UIAlertController.confirm(withPresenter: self, message: "Are you sure you want to block this user forever?") {
                     isPost ? self.blockUser(withUserID: selectedPost.userID) : self.blockUser(withUserID: selectedComment.userID)
                 }
             }
+            
             controller.addAction(blockUserAction)
         }
         
@@ -423,7 +421,6 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         self.headerView.post = post
         self.configureHeaderSize()
         self.tableView.layoutIfNeeded()
-        self.headerView.contentContainerView.rasterizeShadow()
         
         self.setupMap()
         self.getComments(forPost: post)

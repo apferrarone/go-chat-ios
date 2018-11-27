@@ -154,12 +154,12 @@ class APIService: NSObject
     
     func getPosts(forLocation location: CLLocationCoordinate2D, withinMiles radius: Double, completion: @escaping LocalTeamResponseClosure)
     {
+        #if DEBUG
+            completion(Post.dummyPosts, Post.dummyPosts, nil)
+            return
+        #endif
+        
         self.request(router: PostRouter.postsForLocation(latitude: location.latitude, longitude: location.longitude, radius: radius)) { (response, error) in
-            
-            #if DEBUG
-                completion(Post.dummyPosts, Post.dummyPosts, nil)
-                return
-            #endif
             
             guard error == nil else {
                 completion(nil, nil, error)
@@ -308,6 +308,11 @@ class APIService: NSObject
     
     func getComments(forPost post: Post, completion: @escaping ([Comment]?, Error?) -> Void)
     {
+        #if DEBUG
+            completion(Comment.dummyComments, nil)
+            return
+        #endif
+        
         self.request(router: CommentRouter.all(post)) { response, error in
             
             guard error == nil else {

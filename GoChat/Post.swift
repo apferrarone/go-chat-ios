@@ -8,68 +8,6 @@
 
 import Foundation
 
-extension Post
-{
-    static var bayAreaCoordinates: [(Double, Double)] {
-        return [
-            (37.7839089, -122.4101843),
-            (37.7880413, -122.4171345),
-            (37.7766702, -122.4304827),
-            (37.7839089, -122.4101843),
-            (37.7718441, -122.4306450),
-            (37.7644590, -122.4378934),
-            (37.7552230, -122.4474025),
-            (37.7458377, -122.4405390),
-            (37.7394473, -122.4445797),
-            (37.7134808, -122.4447480),
-            (37.7506301, -122.4604054),
-            (37.6852401, -122.4654561),
-            (37.6713822, -122.4654561),
-            (37.7068212, -122.4218512),
-            (37.6803102, -122.4275754),
-            (37.7809749, -122.4785881),
-            (37.7124153, -122.4910467),
-            (37.6387261, -122.4630991),
-            (37.6589879, -122.4267336),
-            (37.7060220, -122.4267336),
-            (37.6629863, -122.4743792)
-        ]
-    }
-    
-    static var dummyPosts: [Post] {
-        var posts = [Post]()
-        
-        for i in 0..<20 {
-            let (lat, long) = bayAreaCoordinates[i]
-            posts.append(Post(id: String(i), lat: lat, long: long))
-        }
-        
-        return posts
-    }
-    
-    convenience init(id: String,
-                     content: String = "This is a dummy post that hopefully takes up more than one line. There is nothing meaningful about this post.",
-                     userID: String = "0123456789",
-                     username: String = "username",
-                     commentCount: Int = 6,
-                     lat: Double = 37.7749,
-                     long: Double = -122.4194,
-                     isPrivate: Bool = false,
-                     createdAt: NSDate = NSDate())
-    {
-        self.init()
-        self._id = id
-        self.content = content
-        self.userID = userID
-        self.username = username
-        self.commentCount = commentCount
-        self.latitude = lat
-        self.longitude = long
-        self.isPrivate = isPrivate
-        self.createdAt = createdAt
-    }
-}
-
 class Post: NSObject
 {
     var _id : String!
@@ -189,5 +127,67 @@ extension Post: PostRouterCompliant
         ]
         
         return dictionary.safeFromNil()
+    }
+}
+
+extension Post
+{
+    static var bayAreaCoordinates: [(Double, Double)] {
+        return [
+            (37.7839089, -122.4101843),
+            (37.7880413, -122.4171345),
+            (37.7766702, -122.4304827),
+            (37.7839089, -122.4101843),
+            (37.7718441, -122.4306450),
+            (37.7644590, -122.4378934),
+            (37.7552230, -122.4474025),
+            (37.7458377, -122.4405390),
+            (37.7394473, -122.4445797),
+            (37.7134808, -122.4447480),
+            (37.7506301, -122.4604054),
+            (37.6852401, -122.4654561),
+            (37.6713822, -122.4654561),
+            (37.7068212, -122.4218512),
+            (37.6803102, -122.4275754),
+            (37.7809749, -122.4785881),
+            (37.7124153, -122.4910467),
+            (37.6387261, -122.4630991),
+            (37.6589879, -122.4267336),
+            (37.7060220, -122.4267336),
+            (37.6629863, -122.4743792)
+        ]
+    }
+    
+    static var dummyPosts: [Post] {
+        var posts = [Post]()
+        
+        for i in 0..<20 {
+            let (lat, long) = bayAreaCoordinates[i]
+            posts.append(Post(id: String(i), lat: lat, long: long))
+        }
+        
+        return posts
+    }
+    
+    convenience init(id: String,
+                     content: String = "This is a dummy post that hopefully takes up more than one line. There is nothing meaningful about this post.",
+                     userID: String = "0123456789",
+                     username: String = "username",
+                     commentCount: Int = 6,
+                     lat: Double = 37.7749,
+                     long: Double = -122.4194,
+                     isPrivate: Bool = false,
+                     createdAt: NSDate = NSDate())
+    {
+        self.init()
+        self._id = id
+        self.content = content
+        self.userID = userID
+        self.username = username
+        self.commentCount = commentCount
+        self.latitude = lat
+        self.longitude = long
+        self.isPrivate = isPrivate
+        self.createdAt = createdAt
     }
 }

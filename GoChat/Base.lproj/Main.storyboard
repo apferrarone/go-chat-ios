@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VLF-Ve-TUm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VLF-Ve-TUm">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -347,7 +347,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                     </mapView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2H0-Jg-Zw2" userLabel="CurrentLocation" customClass="BouncingButton" customModule="GoChat" customModuleProvider="target">
-                                        <rect key="frame" x="107.5" y="543" width="160" height="40"/>
+                                        <rect key="frame" x="107.5" y="533" width="160" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="160" id="f3M-vv-7YG"/>
@@ -388,7 +388,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.32967679794520549" colorSpace="custom" customColorSpace="sRGB"/>
                                         <blurEffect style="dark"/>
                                     </visualEffectView>
                                 </subviews>
@@ -398,7 +398,7 @@
                                     <constraint firstItem="qmN-j5-YOb" firstAttribute="top" secondItem="Hvp-WH-aAg" secondAttribute="top" id="0oK-85-8Vl"/>
                                     <constraint firstAttribute="bottom" secondItem="qmN-j5-YOb" secondAttribute="bottom" id="9Kf-3c-FCd"/>
                                     <constraint firstItem="6xJ-Re-n8o" firstAttribute="top" secondItem="Hvp-WH-aAg" secondAttribute="top" id="EjE-W1-kVJ"/>
-                                    <constraint firstAttribute="bottom" secondItem="2H0-Jg-Zw2" secondAttribute="bottom" constant="20" id="L3Y-0R-arh"/>
+                                    <constraint firstAttribute="bottom" secondItem="2H0-Jg-Zw2" secondAttribute="bottom" constant="30" id="L3Y-0R-arh"/>
                                     <constraint firstItem="6xJ-Re-n8o" firstAttribute="leading" secondItem="Hvp-WH-aAg" secondAttribute="leading" id="TNZ-D8-MWv"/>
                                     <constraint firstAttribute="trailing" secondItem="qmN-j5-YOb" secondAttribute="trailing" id="ZPO-5s-LZr"/>
                                     <constraint firstItem="qmN-j5-YOb" firstAttribute="leading" secondItem="Hvp-WH-aAg" secondAttribute="leading" id="aI9-im-g9o"/>
@@ -439,7 +439,7 @@
                             <constraint firstItem="kP7-9H-NxX" firstAttribute="leading" secondItem="Hzc-J0-1OW" secondAttribute="leading" id="ZIR-yg-J9h"/>
                             <constraint firstItem="JMx-wq-a2H" firstAttribute="centerX" secondItem="Hzc-J0-1OW" secondAttribute="centerX" id="bvE-D5-D4L"/>
                             <constraint firstAttribute="trailing" secondItem="kP7-9H-NxX" secondAttribute="trailing" id="e6E-nW-Bqc"/>
-                            <constraint firstItem="J9p-LW-VdC" firstAttribute="top" secondItem="JMx-wq-a2H" secondAttribute="bottom" constant="30" id="gyk-Ld-9qd"/>
+                            <constraint firstAttribute="bottom" secondItem="JMx-wq-a2H" secondAttribute="bottom" constant="30" id="gyk-Ld-9qd"/>
                             <constraint firstItem="Hvp-WH-aAg" firstAttribute="leading" secondItem="Hzc-J0-1OW" secondAttribute="leading" id="kpK-PF-qx8"/>
                             <constraint firstAttribute="bottom" secondItem="kP7-9H-NxX" secondAttribute="bottom" id="wUN-9J-gJQ"/>
                             <constraint firstItem="Hvp-WH-aAg" firstAttribute="top" secondItem="yca-zW-bxp" secondAttribute="bottom" id="yfl-BL-hyQ"/>
@@ -1046,7 +1046,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
-                                        <blurEffect style="light"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29593857020547948" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <blurEffect style="dark"/>
                                     </visualEffectView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="99" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EV8-u9-P4n">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
@@ -1070,23 +1071,23 @@
                                                             <rect key="frame" x="12" y="6" width="351" height="86.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDa-uF-gVe" customClass="UsernameLabel" customModule="GoChat" customModuleProvider="target">
-                                                                    <rect key="frame" x="8" y="8" width="73" height="22"/>
+                                                                    <rect key="frame" x="12" y="8" width="73" height="22"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="22" id="Y2T-4L-d5f"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
-                                                                    <nil key="textColor"/>
+                                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Content about Pokemon Go and other bullshit here in this label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9fs-t6-mSH" customClass="ContentLabel" customModule="GoChat" customModuleProvider="target">
-                                                                    <rect key="frame" x="8" y="32" width="335" height="41"/>
+                                                                    <rect key="frame" x="12" y="32" width="327" height="41"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3jD-xD-hMG" customClass="TimestampLabel" customModule="GoChat" customModuleProvider="target">
-                                                                    <rect key="frame" x="280" y="4" width="63" height="22"/>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <rect key="frame" x="276" y="4" width="63" height="22"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="63" id="RQm-uf-8GU"/>
                                                                         <constraint firstAttribute="height" constant="22" id="WmJ-hh-XM2"/>
@@ -1094,17 +1095,18 @@
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
-                                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.54663420376712324" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="backgroundColor" white="1" alpha="0.096746575342465752" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="trailing" secondItem="3jD-xD-hMG" secondAttribute="trailing" constant="8" id="A73-v1-m5p"/>
+                                                                <constraint firstAttribute="trailing" secondItem="3jD-xD-hMG" secondAttribute="trailing" constant="12" id="A73-v1-m5p"/>
                                                                 <constraint firstItem="3jD-xD-hMG" firstAttribute="top" secondItem="kep-AH-tCz" secondAttribute="top" constant="4" id="Eag-LO-yM4"/>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="72" id="IEX-bl-Oq6"/>
-                                                                <constraint firstAttribute="trailing" secondItem="9fs-t6-mSH" secondAttribute="trailing" constant="8" id="MsS-wU-p7f"/>
+                                                                <constraint firstAttribute="trailing" secondItem="9fs-t6-mSH" secondAttribute="trailing" constant="12" id="MsS-wU-p7f"/>
                                                                 <constraint firstItem="TDa-uF-gVe" firstAttribute="top" secondItem="kep-AH-tCz" secondAttribute="top" constant="8" id="NKR-pr-k94"/>
-                                                                <constraint firstItem="9fs-t6-mSH" firstAttribute="leading" secondItem="kep-AH-tCz" secondAttribute="leading" constant="8" id="hUq-uO-a3p"/>
+                                                                <constraint firstItem="9fs-t6-mSH" firstAttribute="leading" secondItem="kep-AH-tCz" secondAttribute="leading" constant="12" id="hUq-uO-a3p"/>
                                                                 <constraint firstItem="9fs-t6-mSH" firstAttribute="top" secondItem="TDa-uF-gVe" secondAttribute="bottom" constant="2" id="tii-WS-TgB"/>
                                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9fs-t6-mSH" secondAttribute="bottom" constant="10" id="vRM-pD-LQn"/>
-                                                                <constraint firstItem="TDa-uF-gVe" firstAttribute="leading" secondItem="kep-AH-tCz" secondAttribute="leading" constant="8" id="xcg-gg-TP3"/>
+                                                                <constraint firstItem="3jD-xD-hMG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TDa-uF-gVe" secondAttribute="trailing" constant="16" id="xcC-uR-UXj"/>
+                                                                <constraint firstItem="TDa-uF-gVe" firstAttribute="leading" secondItem="kep-AH-tCz" secondAttribute="leading" constant="12" id="xcg-gg-TP3"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>

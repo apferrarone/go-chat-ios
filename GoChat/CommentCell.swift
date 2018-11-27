@@ -27,13 +27,6 @@ class CommentCell: UITableViewCell
     {
         super.awakeFromNib()
         self.containerView.roundCorners()
-        self.containerView.drawShadow()
-    }
-    
-    override func layoutSubviews()
-    {
-        super.layoutSubviews()
-        self.contentView.rasterizeShadow()
     }
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool)

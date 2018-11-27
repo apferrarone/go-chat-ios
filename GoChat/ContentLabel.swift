@@ -18,6 +18,5 @@ class ContentLabel: UILabel
     func setup()
     {
         self.font = UIFont(name: "Avenir-Book", size: 15)
-        self.textColor = .white
     }
 }

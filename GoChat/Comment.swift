@@ -106,3 +106,32 @@ extension Comment: CommentRouterCompliant
     }
 }
 
+extension Comment
+{
+    static var dummyComments: [Comment] {
+        var comments = [Comment]()
+        
+        for i in 0..<20 {
+            comments.append(Comment(id: String(i)))
+        }
+        
+        return comments
+    }
+    
+    convenience init(id: String?,
+                     postID: String? = "0123456789",
+                     userID: String? = "0123456789",
+                     username: String? = "username",
+                     content: String? = "This is a dummy comment that hopefully takes up more than 1 line. There is nothing meaningful about this comment lol.",
+                     createdAt: NSDate = NSDate())
+    {
+        self.init()
+        self._id = id
+        self.postID = postID
+        self.userID = userID
+        self.username = username
+        self.content = content
+        self.createdAt = createdAt
+    }
+}
+

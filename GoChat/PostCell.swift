@@ -35,10 +35,6 @@ class PostCell: UITableViewCell
             self.usernameLabel.text = post?.username
             self.timestampLabel.setTimeAgo(date: post?.createdAt)
             
-            #if DEBUG
-            self.usernameLabel.textColor = .lightGray
-            #endif
-            
             if let post = self.post {
                 
                 if post.commentCount > 0 {
@@ -73,8 +69,8 @@ class PostCell: UITableViewCell
         super.setHighlighted(highlighted, animated: animated)
         highlighted ? self.touchDown() : self.touchUp()
     }
-    
-    // MARK: Utilities
+
+// MARK: - Utilities
     
     func hideRepliesContainer(_ shouldHide: Bool)
     {

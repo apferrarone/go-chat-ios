@@ -54,8 +54,7 @@ class PostDetailHeaderView: UIView
     override func awakeFromNib()
     {
         super.awakeFromNib()
-        self.contentContainerView.drawShadow()
-        self.contentContainerView.rasterizeShadow()
+        self.contentContainerView.roundCorners()
     }
     
     func showLoading(_ shouldShow: Bool)
