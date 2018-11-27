@@ -20,6 +20,7 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var textContainerBottomAnchor: NSLayoutConstraint!
     @IBOutlet weak var textContainerHeightAnchor: NSLayoutConstraint!
+    
     @IBOutlet weak var growingTextView: GrowingTextView! {
         didSet {
             self.growingTextView.growingTextViewDelegate = self
@@ -185,7 +186,7 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         UIView.animateWithKeyboardNotification(notification: notification)
         { keyboardHeight, keyboardWindowY in
             
-            self.textContainerBottomAnchor.constant = keyboardHeight
+            self.textContainerBottomAnchor.constant = keyboardHeight - self.view.safeAreaInsets.bottom
             self.view.layoutIfNeeded()
             
             if keyboardHeight > 0 {

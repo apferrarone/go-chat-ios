@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TextInputContainer" customModule="GoChat" customModuleProvider="target">
+            <connections>
+                <outlet property="sendButton" destination="ymH-1r-IeT" id="wF9-0s-ZbT"/>
+                <outlet property="textView" destination="Qra-ld-115" id="8Rf-sH-PZx"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VzX-ZJ-nBG" userLabel="textContainer" customClass="TextInputContainer" customModule="GoChat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ymH-1r-IeT">
+                    <rect key="frame" x="311" y="8" width="64" height="651"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="XfP-Q1-Wgk"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                    <state key="normal" title="send"/>
+                </button>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Qra-ld-115" customClass="GrowingTextView" customModule="GoChat" customModuleProvider="target">
+                    <rect key="frame" x="8" y="8" width="293" height="651"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Qra-ld-115" firstAttribute="top" secondItem="VzX-ZJ-nBG" secondAttribute="top" constant="8" id="NsT-X2-2tM"/>
+                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="52" id="SNp-zh-ivU"/>
+                <constraint firstItem="ymH-1r-IeT" firstAttribute="top" secondItem="VzX-ZJ-nBG" secondAttribute="top" constant="8" id="Zez-7A-uoO"/>
+                <constraint firstAttribute="trailing" secondItem="ymH-1r-IeT" secondAttribute="trailing" id="fJG-hT-beX"/>
+                <constraint firstAttribute="bottom" secondItem="ymH-1r-IeT" secondAttribute="bottom" constant="8" id="jVQ-Uo-JPK"/>
+                <constraint firstAttribute="bottom" secondItem="Qra-ld-115" secondAttribute="bottom" constant="8" id="rM0-6d-ii2"/>
+                <constraint firstItem="Qra-ld-115" firstAttribute="leading" secondItem="VzX-ZJ-nBG" secondAttribute="leading" constant="8" id="zBo-7z-Eh9"/>
+                <constraint firstItem="ymH-1r-IeT" firstAttribute="leading" secondItem="Qra-ld-115" secondAttribute="trailing" constant="10" id="zGB-Fp-Jmc"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="hfO-3w-QSC"/>
+        </view>
+    </objects>
+</document>

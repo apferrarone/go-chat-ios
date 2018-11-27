@@ -1137,7 +1137,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xPY-fw-6IJ">
                                                 <rect key="frame" x="311" y="8" width="64" height="36"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="64" id="xyo-fy-juW"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="xyo-fy-juW"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                                 <state key="normal" title="send"/>
@@ -1173,7 +1173,7 @@
                                     <constraint firstAttribute="trailing" secondItem="BlV-QE-l76" secondAttribute="trailing" id="GFA-MH-ql0"/>
                                     <constraint firstItem="BlV-QE-l76" firstAttribute="leading" secondItem="iUc-v2-WBe" secondAttribute="leading" id="USU-kF-UeF"/>
                                     <constraint firstItem="EV8-u9-P4n" firstAttribute="top" secondItem="iUc-v2-WBe" secondAttribute="top" id="V2b-Dg-T6Y"/>
-                                    <constraint firstAttribute="bottom" secondItem="BlV-QE-l76" secondAttribute="bottom" id="bZV-9C-jqo"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="BlV-QE-l76" secondAttribute="bottom" constant="-8" id="bZV-9C-jqo"/>
                                     <constraint firstAttribute="bottom" secondItem="SNa-Jo-Mhs" secondAttribute="bottom" id="cMK-HH-9BQ"/>
                                     <constraint firstItem="EV8-u9-P4n" firstAttribute="leading" secondItem="iUc-v2-WBe" secondAttribute="leading" id="d5h-j0-jmr"/>
                                     <constraint firstItem="SNa-Jo-Mhs" firstAttribute="top" secondItem="iUc-v2-WBe" secondAttribute="top" id="u6g-d2-GB4"/>

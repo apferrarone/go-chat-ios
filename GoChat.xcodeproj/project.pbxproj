@@ -23,6 +23,8 @@
 		681B06F51E0138E900BBE0AE /* PostDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681B06F41E0138E900BBE0AE /* PostDetailHeaderView.swift */; };
 		681B06FB1E015F6600BBE0AE /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681B06FA1E015F6600BBE0AE /* Comment.swift */; };
 		681B06FD1E01653900BBE0AE /* Scrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681B06FC1E01653900BBE0AE /* Scrolling.swift */; };
+		682D8C7A21AD59F900F77B61 /* TextInputContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682D8C7921AD59F900F77B61 /* TextInputContainer.xib */; };
+		682D8C7C21AD5A4A00F77B61 /* TextInputContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682D8C7B21AD5A4A00F77B61 /* TextInputContainer.swift */; };
 		6830D5FB1E1D87680092F316 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6830D5FA1E1D87680092F316 /* MenuController.swift */; };
 		6830D5FD1E1DA4D30092F316 /* PostsMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6830D5FC1E1DA4D30092F316 /* PostsMenuAnimator.swift */; };
 		688834851DF2231800F48C5E /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688834841DF2231800F48C5E /* Strings.swift */; };
@@ -80,6 +82,8 @@
 		681B06F41E0138E900BBE0AE /* PostDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDetailHeaderView.swift; sourceTree = "<group>"; };
 		681B06FA1E015F6600BBE0AE /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		681B06FC1E01653900BBE0AE /* Scrolling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scrolling.swift; sourceTree = "<group>"; };
+		682D8C7921AD59F900F77B61 /* TextInputContainer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextInputContainer.xib; sourceTree = "<group>"; };
+		682D8C7B21AD5A4A00F77B61 /* TextInputContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputContainer.swift; sourceTree = "<group>"; };
 		6830D5FA1E1D87680092F316 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		6830D5FC1E1DA4D30092F316 /* PostsMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsMenuAnimator.swift; sourceTree = "<group>"; };
 		688834841DF2231800F48C5E /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -259,6 +263,8 @@
 				681B06E31DFFC1F700BBE0AE /* TeamNavBar.swift */,
 				681B06E71E01231200BBE0AE /* UsernameLabel.swift */,
 				680904A01E07CE8C00BE37B5 /* GrowingTextView.swift */,
+				682D8C7921AD59F900F77B61 /* TextInputContainer.xib */,
+				682D8C7B21AD5A4A00F77B61 /* TextInputContainer.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -414,6 +420,7 @@
 				680DBB791E039EB400288ED6 /* PostDetailHeaderView.xib in Resources */,
 				68F2AB2A1DF2111400E703AA /* Assets.xcassets in Resources */,
 				68F2AB281DF2111400E703AA /* Main.storyboard in Resources */,
+				682D8C7A21AD59F900F77B61 /* TextInputContainer.xib in Resources */,
 				68E111B81DFA681E006643CE /* PostCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,12 +471,14 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
+				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -518,6 +527,7 @@
 				68FEA6FB1DF584EE0014CA8D /* Navigation.swift in Sources */,
 				68A39E2D1DFE53550097E524 /* GCD.swift in Sources */,
 				68A39E291DFE076C0097E524 /* PostsMap.swift in Sources */,
+				682D8C7C21AD5A4A00F77B61 /* TextInputContainer.swift in Sources */,
 				688834891DF22D5E00F48C5E /* APIService.swift in Sources */,
 				68F2AB231DF2111400E703AA /* AppDelegate.swift in Sources */,
 				680904A11E07CE8C00BE37B5 /* GrowingTextView.swift in Sources */,

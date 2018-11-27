@@ -11,5 +11,6 @@ target 'GoChat' do
 pod 'Alamofire'
 pod 'DZNEmptyDataSet'
 pod 'KeychainAccess'
+pod 'PureLayout'
 
 end

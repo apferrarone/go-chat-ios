@@ -33,36 +33,47 @@ class GrowingTextView: UITextView, UITextViewDelegate
     
     func textViewDidChange(_ textView: UITextView)
     {
-        //toggle placeholder:
+        // toggle placeholder:
         if self.text.isEmpty {
             self.placeholderLabel.isHidden = false
         } else {
             self.placeholderLabel.isHidden = true
         }
+        
+        // resize textView
+        let size = CGSize(width: textView.frame.width, height: .greatestFiniteMagnitude)
+        var estimatedSize = textView.sizeThatFits(size)
+        
+        if let max = self.maxHeight {
+            estimatedSize.height = min(estimatedSize.height, max)
+            self.isScrollEnabled = estimatedSize.height >= max
+        }
+        
+        self.textViewHeightAnchor.constant = estimatedSize.height
     }
     
     override func layoutSubviews()
     {
-        super.layoutSubviews()
-        
-        var newSize = self.contentSize
-        newSize.width += (self.textContainerInset.left + self.textContainerInset.right) / 2.0
-        newSize.height += (self.textContainerInset.top + self.textContainerInset.bottom) / 2.0
-        
-        if let min = self.minHeight {
-            newSize.height = max(newSize.height, min)
-        }
-        if let max = self.maxHeight {
-            newSize.height = min(newSize.height, max)
-        }
-        
-        self.textViewHeightAnchor.constant = newSize.height
-        self.growingTextViewDelegate?.textView?(self, didChangeHeight: newSize.height)
-        
-        self.scrollToBottom(animated: true)
+//        super.layoutSubviews()
+//
+//        var newSize = self.contentSize
+//        newSize.width += (self.textContainerInset.left + self.textContainerInset.right) / 2.0
+//        newSize.height += (self.textContainerInset.top + self.textContainerInset.bottom) / 2.0
+//
+//        if let min = self.minHeight {
+//            newSize.height = max(newSize.height, min)
+//        }
+//        if let max = self.maxHeight {
+//            newSize.height = min(newSize.height, max)
+//        }
+//
+//        self.textViewHeightAnchor.constant = newSize.height
+//        self.growingTextViewDelegate?.textView?(self, didChangeHeight: newSize.height)
+//
+//        self.scrollToBottom(animated: true)
     }
 
-    // MARK: Initialization
+// MARK: Initialization
     
     private func setup()
     {
@@ -72,8 +83,9 @@ class GrowingTextView: UITextView, UITextViewDelegate
             height = min(height, maxHeight)
         }
     
-        self.textViewHeightAnchor = self.heightAnchor.constraint(equalTo: self.heightAnchor)
+        self.textViewHeightAnchor = self.heightAnchor.constraint(equalToConstant: height)
         self.textViewHeightAnchor.isActive = true
+        self.isScrollEnabled = false
         
         self.delegate = self
         self.showsVerticalScrollIndicator = false
