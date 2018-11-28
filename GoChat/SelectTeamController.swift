@@ -25,7 +25,7 @@ class SelectTeamController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.checkButton.isEnabled = false //enabled once user selects team
+        self.checkButton.isEnabled = false // enabled once user selects team
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -55,9 +55,9 @@ class SelectTeamController: UIViewController
     
 // MARK: - Actions:
     
-    @IBAction func yellowInstinctSelected(_ sender: UIButton) {}
-    @IBAction func blueMysticSelected(_ sender: UIButton) {}
-    @IBAction func redValorSelected(_ sender: UIButton) {}
+    @IBAction func yellowInstinctSelected(_ sender: UIButton) { self.checkButton.isEnabled = true }
+    @IBAction func blueMysticSelected(_ sender: UIButton) { self.checkButton.isEnabled = true }
+    @IBAction func redValorSelected(_ sender: UIButton) { self.checkButton.isEnabled = true }
     
     @IBAction func handleCheckMarkTapped(_ sender: UIBarButtonItem)
     {

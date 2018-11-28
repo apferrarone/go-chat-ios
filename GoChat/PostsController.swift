@@ -74,11 +74,11 @@ class PostsController: UIViewController, UITableViewDataSource, UITableViewDeleg
         self.tableView.addSubview(self.refreshControl)
         
         // check for a logged in user, if not begin auth flow
-//        self.checkForUser { newUser in
-//            self.fetchDefaultPosts() //will also center map to users current location
-//            self.mapView.zoomToHumanLevel()
-//            self.mapView.postDelegate = self
-//        }
+        self.checkForUser { newUser in
+            self.fetchDefaultPosts() // will also center map to users current location
+            self.mapView.zoomToHumanLevel()
+            self.mapView.postDelegate = self
+        }
         
         self.fetchDefaultPosts() // will also center map to users current location
         self.mapView.zoomToHumanLevel()
@@ -135,7 +135,8 @@ class PostsController: UIViewController, UITableViewDataSource, UITableViewDeleg
             let animator = PostsMenuAnimator()
             animator.isPushAnimation = (operation == .push)
             return animator
-        } else {
+        }
+        else {
             return nil
         }
     }

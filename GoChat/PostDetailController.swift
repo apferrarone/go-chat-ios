@@ -11,12 +11,17 @@ import MapKit
 import DZNEmptyDataSet
 import PureLayout
 
-class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, KeyboardMover, PostDetailHeaderDelegate, GrowingTextViewDelegate
+class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, KeyboardMover, PostDetailHeaderDelegate, InputContainerDelegate
 {
     @IBOutlet weak var headerView: PostDetailHeaderView!
     @IBOutlet weak var mapView: PostsMap!
     @IBOutlet weak var contentContainerView: UIView!
+    @IBOutlet weak var contentContainerBottom: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewBottom: NSLayoutConstraint!
+    
+    let inputContainer = InputContainer.fromNib()
+    var inputBottom = NSLayoutConstraint()
     
     private struct PostDetail {
         static let CELL_IDENTIFIER_COMMENT = "commentCell"
@@ -25,86 +30,27 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
     var post: Post?
     var comments = [Comment]()
     
-    let inputContainer = InputContainer.fromNib()
-    var inputBottom = NSLayoutConstraint()
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         self.setupTableView()
+        self.setupInputContainer()
         self.listenForKeyboardNotifications(shouldListen: true)
         self.headerView.delegate = self
         
         if let post = self.post {
             self.update(withPost: post)
         }
-        
-        // input container
-        self.view.addSubview(self.inputContainer)
-        self.inputContainer.autoPinEdge(toSuperviewEdge: .left)
-        self.inputContainer.autoPinEdge(toSuperviewEdge: .right)
-        self.inputBottom = self.inputContainer.autoPinEdge(toSuperviewEdge: .bottom)
-        self.inputBottom.isActive = true
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController.map { $0.interactivePopGestureRecognizer?.isEnabled = true } 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     deinit
     {
         self.listenForKeyboardNotifications(shouldListen: false)
-    }
-    
-    // MARK: GrowingTextViewDelegate
-    
-    func textView(_ textView: GrowingTextView, didChangeHeight height: CGFloat) {
-//        self.textContainerHeightAnchor.constant = height
-    }
-    
-    // MARK: Actions
-    
-    @IBAction func handleSend(_ sender: UIButton)
-    {
-//        if let commentText = self.growingTextView.text, !growingTextView.text.isEmpty {
-//            
-////            self.sendButton.isEnabled = false
-//            self.growingTextView.isUserInteractionEnabled = true
-//            
-//            self.view.endEditing(true)
-//            
-//            let comment = Comment()
-//            comment.postID = self.post?._id
-//            comment.content = commentText
-//            
-//            comment.save { newComment, error in
-//                
-//                DispatchQueue.main.async {
-//                    guard error == nil else {
-//                        
-//                        // keep input container enabled so user can send again:
-////                        self.sendButton.isEnabled = true
-////                        self.growingTextView.isUserInteractionEnabled = true
-////                        self.growingTextView.becomeFirstResponder()
-//                        return
-//                    }
-//                    
-//                    // success
-////                    self.growingTextView.text = nil
-//                    
-//                    // textViewDidChange only gets called when user changes something
-//                    // not progamatic changes so we need to call it to update placeholder
-//                    // call this on the delegate which is not us its the growingTextView
-////                    self.growingTextView.textViewDidChange(self.growingTextView)
-////
-////                    self.growingTextView.isUserInteractionEnabled = true
-////                    self.sendButton.isEnabled = true
-//                    self.add(comment: newComment)
-//                }
-//            }
-//        }
     }
     
     private var contentIsVisible = false
@@ -114,10 +60,8 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         UIView.animate(withDuration: 0.25, animations: {
             let alpha = self.contentIsVisible ? 1.0 : 0.0 as CGFloat
             self.contentContainerView.alpha = alpha
-            self.inputContainer.alpha = alpha
         }) { isComplete in
             self.contentContainerView.isHidden = !self.contentContainerView.isHidden
-            self.inputContainer.isHidden = !self.inputContainer.isHidden
             self.contentIsVisible = !self.contentIsVisible
         }
     }
@@ -137,6 +81,7 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.contentInset.bottom = 100
         self.tableView.keyboardDismissMode = .onDrag
+        self.tableView.backgroundColor = .clear
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -180,6 +125,43 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         return true
     }
     
+// MARK: - InputContainerDelegate
+    
+    func inputContainer(_ inputContainer: InputContainer, didChangeText text: String?) {}
+    
+    func inputContainer(_ inputContainer: InputContainer, didCommitAction text: String?)
+    {
+        if let commentText = text, !commentText.isEmpty {
+
+            inputContainer.sendButton.isEnabled = false
+            inputContainer.isUserInteractionEnabled = false
+            self.view.endEditing(true)
+
+            let comment = Comment()
+            comment.postID = self.post?._id
+            comment.content = commentText
+
+            comment.save { newComment, error in
+                DispatchQueue.main.async {
+                    
+                    // allow interaction for either new message or retry send if err
+                    self.inputContainer.isUserInteractionEnabled = true
+                    self.inputContainer.sendButton.isEnabled = true
+                    
+                    guard error == nil else {
+                        // let user try and send again:
+                        self.inputContainer.textView.becomeFirstResponder()
+                        return
+                    }
+
+                    // success
+                    self.inputContainer.resetText()
+                    self.add(comment: newComment)
+                }
+            }
+        }
+    }
+    
 // MARK: - Keyboard Management
     
     func keyboardMoved(notification: Notification)
@@ -188,10 +170,8 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         // always callt on the parent view to update all constraints
         self.view.layoutIfNeeded()
         
-        UIView.animateWithKeyboardNotification(notification: notification)
-        { keyboardHeight, keyboardWindowY in
-            
-//            self.textContainerBottomAnchor.constant = keyboardHeight - self.view.safeAreaInsets.bottom
+        UIView.animateWithKeyboardNotification(notification: notification) { keyboardHeight, keyboardWindowY in
+            self.tableViewBottom.constant = keyboardHeight
             self.inputBottom.constant = -keyboardHeight
             self.view.layoutIfNeeded()
             
@@ -205,9 +185,8 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
                 if self.comments.count == 0 {
                     self.headerView.repliesLabel.alpha = 0
                 }
-                
-            } else {
-                
+            }
+            else {
                 // bring back replies label
                 self.headerView.repliesLabel.alpha = 1
             }
@@ -243,7 +222,6 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         var selectedComment: Comment! = nil
         
         if let postItem = item as? Post {
-            
             selectedPost = postItem
             isPost = true
             contentIsUsers = postItem.userID == User.currentUser()?._id
@@ -251,7 +229,6 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
             pronoun = contentIsUsers ? "your post" : "\(username)'s post"
         }
         else if let commentItem = item as? Comment {
-            
             selectedComment = commentItem
             isPost = false
             contentIsUsers = commentItem.userID == User.currentUser()?._id
@@ -290,7 +267,7 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
             controller.addAction(reportAction)
             
             let blockUserAction = UIAlertAction(title: "block user", style: .destructive) { action in
-                                UIAlertController.confirm(withPresenter: self, message: "Are you sure you want to block this user forever?") {
+                UIAlertController.confirm(withPresenter: self, message: "Are you sure you want to block this user forever?") {
                     isPost ? self.blockUser(withUserID: selectedPost.userID) : self.blockUser(withUserID: selectedComment.userID)
                 }
             }
@@ -305,18 +282,19 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
     private func delete(post: Post)
     {
         self.showLoading(true)
+        
         post.delete { success, error in
-            
             DispatchQueue.main.async {
+                
                 self.showLoading(false)
                 
                 if success && error == nil {
-                    
                     // broadcast that post was deleted so listeners can update data sources then return back to Posts
                     NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.Notifications.NOTIFICATION_POST_DELETED), object: post)
                     _ = self.navigationController?.popViewController(animated: true)
                     
-                } else {
+                }
+                else {
                     UIAlertController.explain(withPresenter: self, title: "Oops", message: "couldn't delete the post.")
                 }
             }
@@ -326,9 +304,10 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
     private func delete(comment: Comment)
     {
         self.showLoading(true)
+        
         comment.delete { success, error in
-            
             DispatchQueue.main.async {
+                
                 self.showLoading(false)
                 
                 if success && error == nil {
@@ -343,9 +322,10 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
     private func report(post: Post)
     {
         self.showLoading(true)
+        
         post.report { success, error in
-            
             DispatchQueue.main.async {
+                
                 self.showLoading(false)
                 
                 if success && error == nil {
@@ -360,9 +340,10 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
     private func report(comment: Comment)
     {
         self.showLoading(true)
+        
         comment.report { success, error in
-            
             DispatchQueue.main.async {
+                
                 self.showLoading(false)
                 
                 if success && error == nil {
@@ -380,8 +361,8 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
             self.showLoading(true)
             
             User.currentUser()?.blockUser(withUserID: id) { success, error in
-                
                 DispatchQueue.main.async {
+                    
                     self.showLoading(false)
                     
                     if success && error == nil {
@@ -443,6 +424,17 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    private func setupInputContainer()
+    {
+        self.contentContainerView.addSubview(self.inputContainer)
+        
+        self.inputContainer.autoPinEdge(toSuperviewEdge: .left)
+        self.inputContainer.autoPinEdge(toSuperviewEdge: .right)
+        self.inputBottom = self.inputContainer.autoPinEdge(toSuperviewEdge: .bottom)
+        self.inputBottom.isActive = true
+        self.inputContainer.delegate = self
+    }
+    
     private func getComments(forPost post: Post)
     {
         self.showLoading(true)
@@ -476,9 +468,5 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         var frame = self.headerView.frame
         frame.size.height = height
         self.headerView.frame = frame
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
     }
 }

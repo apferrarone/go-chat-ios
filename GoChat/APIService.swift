@@ -52,18 +52,13 @@ class APIService: NSObject
     func signUp(newUser user: User, completion: @escaping AuthResponseClosure)
     {
         self.request(router: UserRouter.signUpNewUser(user)) { response, error in
-            
-            #if DEBUG
-                completion(User(), nil, nil)
-                return
-            #endif
-            
+
             guard error == nil else {
                 completion(nil, nil, error)
                 return
             }
             
-            //success
+            // success
             if let result = response as? [String: AnyObject],
                 let userParams = result[Constants.JSONResponseKeys.USER] as? [String: AnyObject],
                 let token = result[Constants.JSONResponseKeys.TOKEN] as? String {
@@ -144,13 +139,13 @@ class APIService: NSObject
                 return
             }
             
-            //catch errors
+            // catch errors:
             let error = NSError(domain: "APIService", code: 400, userInfo: [NSLocalizedDescriptionKey: "Couldn't understand HTTP response"])
             completion(false, error)
         }
     }
     
-    // MARK: Posts
+// MARK: - Posts
     
     func getPosts(forLocation location: CLLocationCoordinate2D, withinMiles radius: Double, completion: @escaping LocalTeamResponseClosure)
     {
@@ -390,12 +385,12 @@ class APIService: NSObject
             }
             
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                completion(response, error)
+                completion(response, NSError())
                 return
             }
             
             guard let data = data else {
-                completion(response, error)
+                completion(response, NSError())
                 return
             }
             
@@ -443,8 +438,8 @@ extension APIService
     {
         var components = URLComponents()
         components.scheme = Constants.API.SCHEME
-        components.host = Constants.API.HOST
-        components.path = path ?? ""
+        components.host = Constants.API.HOST_PRODUCTION
+        components.path = "\(Constants.API.API_PATH)\(path ?? "")"
         components.queryItems = [URLQueryItem]()
         
         if let parameters = parameters {

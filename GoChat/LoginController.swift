@@ -138,8 +138,8 @@ class LoginController: UIViewController, UITextFieldDelegate, KeyboardMover
         self.user.password = password
         
         self.user.signUp() { user, error in
-            
             DispatchQueue.main.async {
+                
                 self.spinner(shouldShow: false)
                 
                 guard error == nil else {

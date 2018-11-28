@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="405" height="248"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S88-UE-eRU" userLabel="textContainer">
+                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S88-UE-eRU" userLabel="textContainer">
                         <rect key="frame" x="0.0" y="0.0" width="405" height="248"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UyM-iA-7CB">
@@ -33,7 +33,7 @@
                                     <action selector="handleAction:" destination="cAT-cD-lii" eventType="touchUpInside" id="lY8-Qh-kjL"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="750" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MV3-9b-J2z">
+                            <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="750" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MV3-9b-J2z">
                                 <rect key="frame" x="12" y="12" width="311" height="224"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -55,6 +55,7 @@
                         <viewLayoutGuide key="safeArea" id="wJC-mr-GTL"/>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="S88-UE-eRU" secondAttribute="bottom" id="PJZ-Oj-evL"/>
                     <constraint firstItem="S88-UE-eRU" firstAttribute="leading" secondItem="vXg-q3-6cP" secondAttribute="leading" id="uS4-sf-AuW"/>
@@ -62,6 +63,7 @@
                     <constraint firstAttribute="trailing" secondItem="S88-UE-eRU" secondAttribute="trailing" id="yDE-2Q-zhM"/>
                 </constraints>
             </view>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <blurEffect style="dark"/>
             <connections>
                 <outlet property="sendButton" destination="UyM-iA-7CB" id="lnu-8Y-zex"/>

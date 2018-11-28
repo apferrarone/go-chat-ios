@@ -160,8 +160,8 @@ extension User: UserRouterCompliant
     func userParameters() -> [String : AnyObject]
     {
         let params : [String: AnyObject?] = [
-            Constants.ParameterKeys.USERNAME : self.username as AnyObject?,
-            Constants.ParameterKeys.PASSWORD : self.password as AnyObject?,
+            Constants.ParameterKeys.USERNAME : self.username as AnyObject,
+            Constants.ParameterKeys.PASSWORD : self.password as AnyObject,
         ]
         
         return params.safeFromNil()

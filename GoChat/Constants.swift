@@ -66,10 +66,9 @@ class Constants: NSObject
     
     struct API
     {
-        static let SCHEME = "http"
-        //static let HOST = "staging.ihwcepkydd.us-east-1.elasticbeanstalk.com"
-        static let HOST = "api.pokemonteam.chat"
-        static let HOST_PRODUCTION = "api.pokemonteam.chat"
+        static let SCHEME = "https"
+        static let HOST_PRODUCTION = "gochatapi.com"
+        static let API_PATH = "/api/v1"
     }
     
     struct Settings

@@ -172,7 +172,7 @@
                                                                 </constraints>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
-                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="next"/>
                                                             </textField>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B4q-SH-AVG">
                                                                 <rect key="frame" x="0.0" y="30" width="240" height="2"/>
@@ -196,7 +196,7 @@
                                                                 </constraints>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
-                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" secureTextEntry="YES"/>
+                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="next" secureTextEntry="YES"/>
                                                             </textField>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zVf-6l-kGQ">
                                                                 <rect key="frame" x="0.0" y="30" width="240" height="2"/>
@@ -1170,10 +1170,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="contentContainerBottom" destination="BmM-fe-gFe" id="3fU-dy-eTw"/>
                         <outlet property="contentContainerView" destination="iUc-v2-WBe" id="h1y-Fk-LpU"/>
                         <outlet property="headerView" destination="Dht-cn-67u" id="ef5-4O-vHm"/>
                         <outlet property="mapView" destination="k8G-Hy-Upt" id="dFG-fV-ATj"/>
                         <outlet property="tableView" destination="EV8-u9-P4n" id="E2u-av-jRJ"/>
+                        <outlet property="tableViewBottom" destination="jsB-KS-w3F" id="AZj-KT-sxa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U4Z-XF-5zk" userLabel="First Responder" sceneMemberID="firstResponder"/>

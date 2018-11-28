@@ -24,7 +24,7 @@ extension UIScrollView
         // we only want to scroll to bottom if we have to
         let delta = max(top, offScreenScrollableContentHeight)
         
-        let bottomOffset = CGPoint(x: 0, y: delta);
+        let bottomOffset = CGPoint(x: 0, y: delta)
         self.setContentOffset(bottomOffset, animated: animated)
     }
 }
