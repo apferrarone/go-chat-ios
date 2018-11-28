@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import DZNEmptyDataSet
+import PureLayout
 
 class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, KeyboardMover, PostDetailHeaderDelegate, GrowingTextViewDelegate
 {
@@ -16,19 +17,6 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var mapView: PostsMap!
     @IBOutlet weak var contentContainerView: UIView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var textContainer: UIView!
-    @IBOutlet weak var sendButton: UIButton!
-    @IBOutlet weak var textContainerBottomAnchor: NSLayoutConstraint!
-    @IBOutlet weak var textContainerHeightAnchor: NSLayoutConstraint!
-    
-    @IBOutlet weak var growingTextView: GrowingTextView! {
-        didSet {
-            self.growingTextView.growingTextViewDelegate = self
-            self.growingTextView.maxHeight = 100
-            self.growingTextView.font = UIFont(name: "Avenir-Book", size: 15)
-            self.growingTextView.placeholderText = "Bruhhh..."
-        }
-    }
     
     private struct PostDetail {
         static let CELL_IDENTIFIER_COMMENT = "commentCell"
@@ -37,18 +25,32 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
     var post: Post?
     var comments = [Comment]()
     
+    let inputContainer = InputContainer.fromNib()
+    var inputBottom = NSLayoutConstraint()
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         self.setupTableView()
-        self.textContainer.drawShadow(withOffset: -0.5)
         self.listenForKeyboardNotifications(shouldListen: true)
         self.headerView.delegate = self
         
         if let post = self.post {
             self.update(withPost: post)
         }
+        
+        // input container
+        self.view.addSubview(self.inputContainer)
+        self.inputContainer.autoPinEdge(toSuperviewEdge: .left)
+        self.inputContainer.autoPinEdge(toSuperviewEdge: .right)
+        self.inputBottom = self.inputContainer.autoPinEdge(toSuperviewEdge: .bottom)
+        self.inputBottom.isActive = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController.map { $0.interactivePopGestureRecognizer?.isEnabled = true } 
     }
     
     deinit
@@ -59,50 +61,50 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: GrowingTextViewDelegate
     
     func textView(_ textView: GrowingTextView, didChangeHeight height: CGFloat) {
-        self.textContainerHeightAnchor.constant = height
+//        self.textContainerHeightAnchor.constant = height
     }
     
     // MARK: Actions
     
     @IBAction func handleSend(_ sender: UIButton)
     {
-        if let commentText = self.growingTextView.text, !growingTextView.text.isEmpty {
-            
-            self.sendButton.isEnabled = false
-            self.growingTextView.isUserInteractionEnabled = true
-            
-            self.view.endEditing(true)
-            
-            let comment = Comment()
-            comment.postID = self.post?._id
-            comment.content = commentText
-            
-            comment.save { newComment, error in
-                
-                DispatchQueue.main.async {
-                    guard error == nil else {
-                        
-                        // keep input container enabled so user can send again:
-                        self.sendButton.isEnabled = true
-                        self.growingTextView.isUserInteractionEnabled = true
-                        self.growingTextView.becomeFirstResponder()
-                        return
-                    }
-                    
-                    // success
-                    self.growingTextView.text = nil
-                    
-                    // textViewDidChange only gets called when user changes something
-                    // not progamatic changes so we need to call it to update placeholder
-                    // call this on the delegate which is not us its the growingTextView
-                    self.growingTextView.textViewDidChange(self.growingTextView)
-                    
-                    self.growingTextView.isUserInteractionEnabled = true
-                    self.sendButton.isEnabled = true
-                    self.add(comment: newComment)
-                }
-            }
-        }
+//        if let commentText = self.growingTextView.text, !growingTextView.text.isEmpty {
+//            
+////            self.sendButton.isEnabled = false
+//            self.growingTextView.isUserInteractionEnabled = true
+//            
+//            self.view.endEditing(true)
+//            
+//            let comment = Comment()
+//            comment.postID = self.post?._id
+//            comment.content = commentText
+//            
+//            comment.save { newComment, error in
+//                
+//                DispatchQueue.main.async {
+//                    guard error == nil else {
+//                        
+//                        // keep input container enabled so user can send again:
+////                        self.sendButton.isEnabled = true
+////                        self.growingTextView.isUserInteractionEnabled = true
+////                        self.growingTextView.becomeFirstResponder()
+//                        return
+//                    }
+//                    
+//                    // success
+////                    self.growingTextView.text = nil
+//                    
+//                    // textViewDidChange only gets called when user changes something
+//                    // not progamatic changes so we need to call it to update placeholder
+//                    // call this on the delegate which is not us its the growingTextView
+////                    self.growingTextView.textViewDidChange(self.growingTextView)
+////
+////                    self.growingTextView.isUserInteractionEnabled = true
+////                    self.sendButton.isEnabled = true
+//                    self.add(comment: newComment)
+//                }
+//            }
+//        }
     }
     
     private var contentIsVisible = false
@@ -110,9 +112,12 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func showMap(_ sender: UIButton)
     {
         UIView.animate(withDuration: 0.25, animations: {
-            self.contentContainerView.alpha = self.contentIsVisible ? 1 : 0
+            let alpha = self.contentIsVisible ? 1.0 : 0.0 as CGFloat
+            self.contentContainerView.alpha = alpha
+            self.inputContainer.alpha = alpha
         }) { isComplete in
             self.contentContainerView.isHidden = !self.contentContainerView.isHidden
+            self.inputContainer.isHidden = !self.inputContainer.isHidden
             self.contentIsVisible = !self.contentIsVisible
         }
     }
@@ -130,8 +135,8 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
     {
         self.tableView.estimatedRowHeight = 88
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.clipsToBounds = false
-        self.tableView.contentInset.bottom = 20
+        self.tableView.contentInset.bottom = 100
+        self.tableView.keyboardDismissMode = .onDrag
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -186,7 +191,8 @@ class PostDetailController: UIViewController, UITableViewDelegate, UITableViewDa
         UIView.animateWithKeyboardNotification(notification: notification)
         { keyboardHeight, keyboardWindowY in
             
-            self.textContainerBottomAnchor.constant = keyboardHeight - self.view.safeAreaInsets.bottom
+//            self.textContainerBottomAnchor.constant = keyboardHeight - self.view.safeAreaInsets.bottom
+            self.inputBottom.constant = -keyboardHeight
             self.view.layoutIfNeeded()
             
             if keyboardHeight > 0 {

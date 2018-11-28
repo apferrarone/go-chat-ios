@@ -11,7 +11,7 @@ import MapKit
 import CoreLocation
 import DZNEmptyDataSet
 
-class PostsController: UIViewController, UITableViewDataSource, UITableViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, PostsMapDelegate, UINavigationControllerDelegate, NewPostControllerDelegate
+class PostsController: UIViewController, UITableViewDataSource, UITableViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, PostsMapDelegate, UINavigationControllerDelegate, NewPostControllerDelegate, UIGestureRecognizerDelegate
 {
     // Foreground
     @IBOutlet weak var tableView: UITableView!
@@ -91,6 +91,8 @@ class PostsController: UIViewController, UITableViewDataSource, UITableViewDeleg
         self.updateTitle()
         self.tableView.deselect()
         self.tableView.reloadData()
+        
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -136,6 +138,17 @@ class PostsController: UIViewController, UITableViewDataSource, UITableViewDeleg
         } else {
             return nil
         }
+    }
+    
+// MARK: - UIGestureRecognizerDelegate
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool
+    {
+        if gestureRecognizer == self.navigationController?.interactivePopGestureRecognizer {
+            return true
+        }
+        
+        return false
     }
     
 // MARK: - NewPostControllerDelegate

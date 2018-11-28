@@ -12,5 +12,6 @@ pod 'Alamofire'
 pod 'DZNEmptyDataSet'
 pod 'KeychainAccess'
 pod 'PureLayout'
+pod 'UITextView+Placeholder', '~> 1.2'
 
 end

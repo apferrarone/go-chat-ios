@@ -26,10 +26,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jZR-NB-vfb" userLabel="outer header container">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="127"/>
+                    <rect key="frame" x="8" y="0.0" width="359" height="127"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Vf-u9-dLP" userLabel="header container">
-                            <rect key="frame" x="12" y="12" width="351" height="109"/>
+                            <rect key="frame" x="12" y="12" width="335" height="109"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nr-wJ-jEP" customClass="UsernameLabel" customModule="GoChat" customModuleProvider="target">
                                     <rect key="frame" x="12" y="8" width="73" height="22"/>
@@ -41,13 +41,13 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Content about PokemonGo and a bunch of other bullshit" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxk-MC-9LQ" customClass="ContentLabel" customModule="GoChat" customModuleProvider="target">
-                                    <rect key="frame" x="12" y="33" width="327" height="36"/>
+                                    <rect key="frame" x="12" y="33" width="311" height="36"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HXT-Os-GMl">
-                                    <rect key="frame" x="303" y="80" width="40" height="25"/>
+                                    <rect key="frame" x="287" y="80" width="40" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="40" id="9Nh-fv-WUh"/>
                                         <constraint firstAttribute="height" constant="25" id="zWc-pr-xGb"/>
@@ -59,7 +59,7 @@
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2d-Vp-ihf" customClass="TimestampLabel" customModule="GoChat" customModuleProvider="target">
-                                    <rect key="frame" x="276" y="8" width="63" height="22"/>
+                                    <rect key="frame" x="260" y="8" width="63" height="22"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="63" id="I8n-X9-4bP"/>
@@ -107,9 +107,9 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="79S-mP-Eak" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Nuq-6U-K9n"/>
-                <constraint firstItem="jZR-NB-vfb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Sue-GW-Ger"/>
+                <constraint firstItem="jZR-NB-vfb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" constant="-8" id="Sue-GW-Ger"/>
                 <constraint firstItem="79S-mP-Eak" firstAttribute="centerX" secondItem="HbJ-Rl-3IQ" secondAttribute="centerX" id="YPY-uW-wHN"/>
-                <constraint firstAttribute="trailing" secondItem="jZR-NB-vfb" secondAttribute="trailing" id="bS8-yy-wwn"/>
+                <constraint firstAttribute="trailingMargin" secondItem="jZR-NB-vfb" secondAttribute="trailing" constant="-8" id="bS8-yy-wwn"/>
                 <constraint firstAttribute="bottom" secondItem="79S-mP-Eak" secondAttribute="bottom" constant="12" id="dLl-Gj-d4m"/>
                 <constraint firstItem="jZR-NB-vfb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="hno-80-P19"/>
                 <constraint firstItem="79S-mP-Eak" firstAttribute="top" secondItem="jZR-NB-vfb" secondAttribute="bottom" constant="14" id="n2A-Vt-GiH"/>

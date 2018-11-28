@@ -1050,7 +1050,7 @@
                                         <blurEffect style="dark"/>
                                     </visualEffectView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="99" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EV8-u9-P4n">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1131,51 +1131,15 @@
                                             <outlet property="delegate" destination="Lxa-K6-td6" id="xWl-wd-7TP"/>
                                         </connections>
                                     </tableView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BlV-QE-l76" userLabel="textContainer">
-                                        <rect key="frame" x="0.0" y="551" width="375" height="52"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xPY-fw-6IJ">
-                                                <rect key="frame" x="311" y="8" width="64" height="36"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="xyo-fy-juW"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
-                                                <state key="normal" title="send"/>
-                                                <connections>
-                                                    <action selector="handleSend:" destination="Lxa-K6-td6" eventType="touchUpInside" id="gqa-Rm-KwD"/>
-                                                </connections>
-                                            </button>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="H3n-0H-C07" customClass="GrowingTextView" customModule="GoChat" customModuleProvider="target">
-                                                <rect key="frame" x="8" y="8" width="293" height="36"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="xPY-fw-6IJ" firstAttribute="leading" secondItem="H3n-0H-C07" secondAttribute="trailing" constant="10" id="9zW-RM-e0K"/>
-                                            <constraint firstItem="xPY-fw-6IJ" firstAttribute="top" secondItem="BlV-QE-l76" secondAttribute="top" constant="8" id="AWV-Wk-DcK"/>
-                                            <constraint firstItem="H3n-0H-C07" firstAttribute="leading" secondItem="BlV-QE-l76" secondAttribute="leading" constant="8" id="F28-dK-pVg"/>
-                                            <constraint firstItem="H3n-0H-C07" firstAttribute="top" secondItem="BlV-QE-l76" secondAttribute="top" constant="8" id="Qn7-Es-leU"/>
-                                            <constraint firstAttribute="trailing" secondItem="xPY-fw-6IJ" secondAttribute="trailing" id="Yxg-Le-wud"/>
-                                            <constraint firstAttribute="bottom" secondItem="xPY-fw-6IJ" secondAttribute="bottom" constant="8" id="hYz-pH-OKD"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="52" id="kyS-t1-M0B"/>
-                                            <constraint firstAttribute="bottom" secondItem="H3n-0H-C07" secondAttribute="bottom" constant="8" id="wbJ-qD-Uju"/>
-                                        </constraints>
-                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="SNa-Jo-Mhs" firstAttribute="leading" secondItem="iUc-v2-WBe" secondAttribute="leading" id="5Hk-iN-ET4"/>
                                     <constraint firstAttribute="trailing" secondItem="EV8-u9-P4n" secondAttribute="trailing" id="6Lg-CA-IDn"/>
-                                    <constraint firstItem="BlV-QE-l76" firstAttribute="top" secondItem="EV8-u9-P4n" secondAttribute="bottom" id="CfD-3r-EHb"/>
-                                    <constraint firstAttribute="trailing" secondItem="BlV-QE-l76" secondAttribute="trailing" id="GFA-MH-ql0"/>
-                                    <constraint firstItem="BlV-QE-l76" firstAttribute="leading" secondItem="iUc-v2-WBe" secondAttribute="leading" id="USU-kF-UeF"/>
                                     <constraint firstItem="EV8-u9-P4n" firstAttribute="top" secondItem="iUc-v2-WBe" secondAttribute="top" id="V2b-Dg-T6Y"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="BlV-QE-l76" secondAttribute="bottom" constant="-8" id="bZV-9C-jqo"/>
                                     <constraint firstAttribute="bottom" secondItem="SNa-Jo-Mhs" secondAttribute="bottom" id="cMK-HH-9BQ"/>
                                     <constraint firstItem="EV8-u9-P4n" firstAttribute="leading" secondItem="iUc-v2-WBe" secondAttribute="leading" id="d5h-j0-jmr"/>
+                                    <constraint firstAttribute="bottom" secondItem="EV8-u9-P4n" secondAttribute="bottom" id="jsB-KS-w3F"/>
                                     <constraint firstItem="SNa-Jo-Mhs" firstAttribute="top" secondItem="iUc-v2-WBe" secondAttribute="top" id="u6g-d2-GB4"/>
                                     <constraint firstAttribute="trailing" secondItem="SNa-Jo-Mhs" secondAttribute="trailing" id="uyy-Em-Et6"/>
                                 </constraints>
@@ -1186,11 +1150,11 @@
                             <constraint firstAttribute="trailing" secondItem="iUc-v2-WBe" secondAttribute="trailing" id="3He-LN-Qrp"/>
                             <constraint firstItem="iUc-v2-WBe" firstAttribute="top" secondItem="R1T-ic-mIo" secondAttribute="bottom" id="8aI-8e-CRF"/>
                             <constraint firstAttribute="trailing" secondItem="k8G-Hy-Upt" secondAttribute="trailing" id="8fG-xt-aAo"/>
-                            <constraint firstItem="Avp-91-XAY" firstAttribute="top" secondItem="iUc-v2-WBe" secondAttribute="bottom" id="BmM-fe-gFe"/>
+                            <constraint firstAttribute="bottom" secondItem="iUc-v2-WBe" secondAttribute="bottom" id="BmM-fe-gFe"/>
                             <constraint firstItem="k8G-Hy-Upt" firstAttribute="top" secondItem="R1T-ic-mIo" secondAttribute="bottom" id="feF-Qu-Jam"/>
                             <constraint firstItem="k8G-Hy-Upt" firstAttribute="leading" secondItem="w8J-Zc-FDa" secondAttribute="leading" id="qHD-1k-6Mr"/>
                             <constraint firstItem="iUc-v2-WBe" firstAttribute="leading" secondItem="w8J-Zc-FDa" secondAttribute="leading" id="rQ8-Ei-QvB"/>
-                            <constraint firstItem="k8G-Hy-Upt" firstAttribute="bottom" secondItem="Avp-91-XAY" secondAttribute="top" id="uO0-AM-COv"/>
+                            <constraint firstItem="k8G-Hy-Upt" firstAttribute="bottom" secondItem="w8J-Zc-FDa" secondAttribute="bottom" id="uO0-AM-COv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="comments" id="nW6-gc-6XG">
@@ -1207,14 +1171,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="contentContainerView" destination="iUc-v2-WBe" id="h1y-Fk-LpU"/>
-                        <outlet property="growingTextView" destination="H3n-0H-C07" id="iZM-g2-Uur"/>
                         <outlet property="headerView" destination="Dht-cn-67u" id="ef5-4O-vHm"/>
                         <outlet property="mapView" destination="k8G-Hy-Upt" id="dFG-fV-ATj"/>
-                        <outlet property="sendButton" destination="xPY-fw-6IJ" id="RAU-mS-fe5"/>
                         <outlet property="tableView" destination="EV8-u9-P4n" id="E2u-av-jRJ"/>
-                        <outlet property="textContainer" destination="BlV-QE-l76" id="BvY-8z-f1A"/>
-                        <outlet property="textContainerBottomAnchor" destination="bZV-9C-jqo" id="eMi-Eu-gbh"/>
-                        <outlet property="textContainerHeightAnchor" destination="kyS-t1-M0B" id="6pN-14-ttI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U4Z-XF-5zk" userLabel="First Responder" sceneMemberID="firstResponder"/>
